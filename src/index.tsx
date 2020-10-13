@@ -1,9 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
+import { NhostApolloProvider, NhostAuthProvider } from 'react-nhost';
+import { IonReactRouter } from '@ionic/react-router';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { auth } from './utils/nhost';
+import { GRAPHQL_API } from './constants/secrets';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <NhostAuthProvider auth={auth}>
+    <NhostApolloProvider auth={auth} gqlEndpoint={GRAPHQL_API}>
+      <IonReactRouter>
+        <App />
+      </IonReactRouter>
+    </NhostApolloProvider>
+  </NhostAuthProvider>,
+  document.getElementById('root'),
+);
+
+// Call the element loader after the app has been rendered the first time
+defineCustomElements(window);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

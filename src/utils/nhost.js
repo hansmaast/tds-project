@@ -1,6 +1,5 @@
-import nhost from "nhost-js-sdk";
-import { BACKEND_URL } from "../constants/secrets";
-
+import nhost from 'nhost-js-sdk';
+import { BACKEND_URL } from '../constants/secrets';
 
 const config = {
   base_url: BACKEND_URL,

@@ -1,9 +1,6 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
-import { auth } from "./utils/nhost";
+import { IonApp } from '@ionic/react';
+import Router from './router';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 /* Basic CSS for apps built with Ionic */
@@ -19,25 +16,11 @@ import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
-import Detail from "./pages/Detail";
-import { NhostApolloProvider, NhostAuthProvider } from "react-nhost";
-import Login from "./pages/Login";
 
 const App: React.FC = () => (
-    <NhostAuthProvider auth={ auth }>
-      <NhostApolloProvider auth={ auth } gqlEndpoint={ "https://hasura-y8790ycz.nhost.app/v1/graphql" }>
-        <IonApp>
-          <IonReactRouter>
-            <IonRouterOutlet>
-              <Route path="/login" component={ Login } exact={ true }/>
-              <Route path="/home" component={ Home } exact={ true }/>
-              <Route path="/details/:id" component={ Detail } exact={ true }/>
-              <Route exact path="/" render={ () => <Redirect to="/login"/> }/>
-            </IonRouterOutlet>
-          </IonReactRouter>
-        </IonApp>
-      </NhostApolloProvider>
-    </NhostAuthProvider>
+  <IonApp>
+    <Router />
+  </IonApp>
 );
 
 export default App;

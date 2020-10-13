@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { IonItem } from "@ionic/react";
+import styled from 'styled-components';
+import { IonItem } from '@ionic/react';
 
 export const Item = styled(IonItem)`
  border-radius: 7px;
