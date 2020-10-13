@@ -9,8 +9,9 @@ import { useMutation } from '@apollo/client';
 import PostCard from '../components/PostCard';
 import { IPost } from '../interfaces/Post/IPost';
 import CommentsContainer from '../components/CommentsContainer';
-import { auth } from '../utils/nhost';
+import { auth, storage } from '../utils/nhost';
 import { DELETE_POST } from '../graphql/mutations';
+import { PUBLIC_STORAGE_DIR } from '../constants/urls';
 
 const DetailPage: React.FC<any> = (props: any) => {
   const { location } = props;
@@ -27,6 +28,7 @@ const DetailPage: React.FC<any> = (props: any) => {
     alert(`Delete ${id}`);
     try {
       await deletePostMutation({ variables: { id } });
+      await storage.delete(`${PUBLIC_STORAGE_DIR}${post.publicPhotoPath}`);
     } catch (e) {
       console.error(e);
     }
