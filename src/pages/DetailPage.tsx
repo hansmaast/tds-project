@@ -1,8 +1,15 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react';
 import {
-  IonAlert,
-  IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar,
+  IonBackButton,
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonPage,
+  IonTitle,
+  IonToolbar,
 } from '@ionic/react';
 import { trashBinOutline } from 'ionicons/icons';
 import { useMutation } from '@apollo/client';
@@ -43,15 +50,15 @@ const DetailPage: React.FC<any> = (props: any) => {
           </IonButtons>
           <IonTitle>TDSGram</IonTitle>
           {
-          auth.getClaim('x-hasura-user-id') === post.user.id
-          && (
-          <IonButtons slot="end">
-            <IonButton onClick={() => deletePost(post.id!)}>
-              <IonIcon color="danger" icon={trashBinOutline} />
-            </IonButton>
-          </IonButtons>
-          )
-          }
+              auth.getClaim('x-hasura-user-id') === post.user.id
+              && (
+              <IonButtons slot="end">
+                <IonButton onClick={() => deletePost(post.id!)}>
+                  <IonIcon color="danger" icon={trashBinOutline} />
+                </IonButton>
+              </IonButtons>
+              )
+            }
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

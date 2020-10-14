@@ -82,16 +82,13 @@ const LoginPage: React.FC<LoginProps> = ({}) => {
                   : <IonIcon icon={arrowForwardCircle} />
               }
           </LoginButton>
-          <IonButton onClick={() => history.replace('/new-post')}>
-            Jump to new post
-          </IonButton>
         </CenterContentContainer>
         <IonToast
-          isOpen={showToast}
-          onDidDismiss={() => setShowToast(false)}
-          message="Your email / password was incorrect."
-          duration={3000}
-          color="danger"
+            isOpen={showToast}
+            onDidDismiss={() => setShowToast(false)}
+            message="Your email / password was incorrect."
+            duration={3000}
+            color="danger"
         />
       </IonContentWithBackground>
     </IonPage>
