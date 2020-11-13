@@ -6,7 +6,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { auth } from './utils/nhost';
-import { GRAPHQL_API } from './constants/secrets';
+import { GRAPHQL_API } from './utils/constants/secrets';
 
 ReactDOM.render(
   <NhostAuthProvider auth={auth}>

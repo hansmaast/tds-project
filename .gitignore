@@ -24,4 +24,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # secrets
-src/constants/secrets.js
+src/utils/constants/secrets.js

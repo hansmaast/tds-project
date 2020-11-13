@@ -5,8 +5,8 @@ import { useHistory } from 'react-router-dom';
 import { getFilenameForPhoto } from '../getFilenameForPhoto';
 import { IInsertPost } from '../../interfaces/Post/IInsertPost';
 import { auth, storage } from '../nhost';
-import { INSERT_POST } from '../../graphql/mutations';
-import { PUBLIC_STORAGE_DIR } from '../../constants/urls';
+import { INSERT_POST } from '../graphql/mutations';
+import { PUBLIC_STORAGE_DIR } from '../constants/urls';
 
 interface NewPostInsertProps {
   postData: IInsertPost;

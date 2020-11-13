@@ -1,7 +1,7 @@
 import nhost from 'nhost-js-sdk';
 import { isPlatform } from '@ionic/react';
 import { Plugins } from '@capacitor/core';
-import { BACKEND_URL } from '../constants/secrets';
+import { BACKEND_URL } from './constants/secrets';
 
 const { Storage } = Plugins;
 
