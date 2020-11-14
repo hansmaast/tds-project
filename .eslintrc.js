@@ -26,6 +26,7 @@ module.exports = {
   rules: {
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
+    'import/prefer-default-export': 'off',
     'react/jsx-filename-extension': 'off',
     'no-empty-pattern': 'off',
     'react/prop-types': 'off',
