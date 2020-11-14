@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { Flex } from '../components/style/Containers';
 import { Button } from '../components/style/Buttons';
 
-const LandingPage = () => {
+export const LandingPage = () => {
   const history = useHistory();
 
   return (
@@ -18,6 +18,7 @@ const LandingPage = () => {
               <Flex column>
                 <Button margin="10pt 0 10pt 0" onClick={() => history.push('/login')}>Login</Button>
                 <Button margin="10pt 0 10pt 0" onClick={() => history.push('/signup')}>Sign Up</Button>
+                <Button margin="10pt 0 10pt 0" onClick={() => history.push('/map')}>Map</Button>
                 <Button margin="10pt 0 10pt 0" onClick={() => history.push('/home')}>Continue</Button>
               </Flex>
             </IonCardContent>
@@ -27,5 +28,3 @@ const LandingPage = () => {
     </IonPage>
   );
 };
-
-export default LandingPage;

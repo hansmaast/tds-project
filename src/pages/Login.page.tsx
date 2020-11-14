@@ -20,7 +20,7 @@ import { Card } from '../components/style/Card';
 import { APP_NAME } from '../utils/constants/strings';
 import BackButtonHeader from '../components/headers/BackButtonHeader';
 
-const LoginPage: React.FC = () => {
+export const LoginPage: React.FC = () => {
   const history = useHistory();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -106,5 +106,3 @@ const LoginPage: React.FC = () => {
     </IonPage>
   );
 };
-
-export default LoginPage;

@@ -21,7 +21,7 @@ import { DELETE_POST } from '../utils/graphql/mutations';
 import { PUBLIC_STORAGE_DIR } from '../utils/constants/urls';
 import { APP_NAME } from '../utils/constants/strings';
 
-const DetailPage: React.FC<any> = (props: any) => {
+export const DetailPage: React.FC<any> = (props: any) => {
   const { location } = props;
   const post: IPost = location?.state?.post;
   const [deletePostMutation] = useMutation(DELETE_POST);
@@ -69,5 +69,3 @@ const DetailPage: React.FC<any> = (props: any) => {
     </IonPage>
   );
 };
-
-export default DetailPage;

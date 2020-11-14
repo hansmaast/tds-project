@@ -19,7 +19,7 @@ import { auth } from '../utils/nhost';
 import SUBSCRIBE_POSTS from '../utils/graphql/subscriptions';
 import { APP_NAME } from '../utils/constants/strings';
 
-const HomePage = () => {
+export const HomePage = () => {
   const history = useHistory();
   const { loading, data } = useSubscription<IPostList>(SUBSCRIBE_POSTS, {
     fetchPolicy: 'no-cache',
@@ -63,5 +63,3 @@ const HomePage = () => {
     </IonPage>
   );
 };
-
-export default HomePage;

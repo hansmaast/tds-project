@@ -20,7 +20,7 @@ import { Card } from '../components/style/Card';
 import { APP_NAME } from '../utils/constants/strings';
 import BackButtonHeader from '../components/headers/BackButtonHeader';
 
-const SignUpPage: React.FC = () => {
+export const SignUpPage: React.FC = () => {
   const history = useHistory();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -107,5 +107,3 @@ const SignUpPage: React.FC = () => {
     </IonPage>
   );
 };
-
-export default SignUpPage;

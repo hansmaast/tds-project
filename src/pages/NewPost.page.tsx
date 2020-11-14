@@ -5,7 +5,7 @@ import {
 } from '@ionic/react';
 import { NewPost } from '../components/posts/NewPost';
 
-const NewPostPage: React.FC = () => (
+export const NewPostPage: React.FC = () => (
   <IonPage>
     <IonHeader>
       <IonToolbar>
@@ -20,5 +20,3 @@ const NewPostPage: React.FC = () => (
     </IonContent>
   </IonPage>
 );
-
-export default NewPostPage;
