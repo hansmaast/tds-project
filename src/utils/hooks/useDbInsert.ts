@@ -3,17 +3,17 @@ import { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 import { getFilenameForPhoto } from '../helpers';
-import { IInsertPost } from '../../interfaces/Post/IInsertPost';
+import { IHikeInsert } from '../../interfaces/Post/IHikeInsert';
 import { auth, storage } from '../nhost';
 import { INSERT_POST } from '../graphql/mutations';
 import { PUBLIC_STORAGE_DIR } from '../constants/urls';
 
 interface NewPostInsertProps {
-  postData: IInsertPost;
+  data: IHikeInsert;
   photo: CameraPhoto | undefined;
 }
 
-export const useNewPostUpload = ({ postData, photo }: NewPostInsertProps) => {
+export const useHikeUpload = ({ data, photo }: { data: IHikeInsert, photo: CameraPhoto | undefined }) => {
   const [filename, setFilename] = useState<string | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [insertPostMutation] = useMutation(INSERT_POST);
@@ -51,7 +51,7 @@ export const useNewPostUpload = ({ postData, photo }: NewPostInsertProps) => {
         await insertPostMutation({
           variables: {
             post: {
-              ...postData,
+              ...data,
               user_id: auth.getClaim('x-hasura-user-id'),
               publicPhotoPath: filename,
             },
@@ -62,7 +62,7 @@ export const useNewPostUpload = ({ postData, photo }: NewPostInsertProps) => {
       }
     } else {
       console.log('failed to post: ', {
-        ...postData,
+        ...data,
         user_id: auth.getClaim('x-hasura-user-id'),
         publicPhotoPath: filename,
       });
