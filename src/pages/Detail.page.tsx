@@ -13,8 +13,8 @@ import {
 } from '@ionic/react';
 import { trashBinOutline } from 'ionicons/icons';
 import { useMutation } from '@apollo/client';
-import PostCard from '../components/posts/PostCard';
-import { IPost } from '../interfaces/Post/IPost';
+import HHCard from '../components/posts/HHCard';
+import { IHike } from '../interfaces/Post/IHike';
 import CommentsContainer from '../components/comments/CommentsContainer';
 import { auth, storage } from '../utils/nhost';
 import { DELETE_POST } from '../utils/graphql/mutations';
@@ -23,7 +23,7 @@ import { APP_NAME } from '../utils/constants/strings';
 
 export const DetailPage: React.FC<any> = (props: any) => {
   const { location } = props;
-  const post: IPost = location?.state?.post;
+  const post: IHike = location?.state?.post;
   const [deletePostMutation] = useMutation(DELETE_POST);
 
   if (!post) {
@@ -63,7 +63,7 @@ export const DetailPage: React.FC<any> = (props: any) => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <PostCard post={post} />
+        <HHCard hike={post} />
         <CommentsContainer postId={post.id!} />
       </IonContent>
     </IonPage>

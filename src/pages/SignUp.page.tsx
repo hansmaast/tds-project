@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   IonIcon,
   IonInput,
   IonLabel,
   IonList,
-  IonPage,
+  IonPage, IonRouterLink,
   IonSpinner,
   IonToast,
   useIonViewWillEnter,
 } from '@ionic/react';
-import { useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { arrowForwardCircle } from 'ionicons/icons';
 import { auth } from '../utils/nhost';
 import { IonContentWithBackground } from '../components/style/IonContentWithBackground';
@@ -19,26 +19,15 @@ import { Button, RoundArrowButton } from '../components/style/Buttons';
 import { Card } from '../components/style/Card';
 import { APP_NAME } from '../utils/constants/strings';
 import BackButtonHeader from '../components/headers/BackButtonHeader';
+import { useAuthentication } from '../utils/hooks/useAuthetication';
 
 export const SignUpPage: React.FC = () => {
   const history = useHistory();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [isAuthenticating, setIsAuthenticating] = useState<boolean>(false);
-  const [showToast, setShowToast] = useState<boolean>(false);
-
-  const authenticateUser = async () => {
-    setIsAuthenticating(true);
-    try {
-      await auth.login(email, password);
-      history.replace('/home');
-    } catch (e) {
-      setShowToast(true);
-      console.error(e);
-    } finally {
-      setIsAuthenticating(false);
-    }
-  };
+  const {
+    authMethods, isAuthenticating, authError, setAuthError,
+  } = useAuthentication();
 
   useIonViewWillEnter(() => {
     if (auth.isAuthenticated()) {
@@ -79,7 +68,7 @@ export const SignUpPage: React.FC = () => {
               </Item>
             </IonList>
           </Card>
-          <RoundArrowButton onClick={() => authenticateUser()}>
+          <RoundArrowButton onClick={() => authMethods.register({ email, password })}>
             {
                 isAuthenticating
                   ? <IonSpinner name="crescent" />
@@ -87,19 +76,18 @@ export const SignUpPage: React.FC = () => {
               }
           </RoundArrowButton>
           <SubTitle>Already signed up?</SubTitle>
-          <SubTitle>No problem. Just press the button below.</SubTitle>
-          <Button
-            margin="12pt"
-            onClick={() => history.replace('/login')}
-          >
-            Login
-          </Button>
+          <SubTitle>No problem. Just press the link below.</SubTitle>
+          <SubTitle>
+            <IonRouterLink onClick={() => history.replace('/login')}>
+              Log in
+            </IonRouterLink>
+          </SubTitle>
 
         </Flex>
         <IonToast
-          isOpen={showToast}
-          onDidDismiss={() => setShowToast(false)}
-          message="Your email / password was incorrect."
+          isOpen={!!authError}
+          onDidDismiss={() => setAuthError('')}
+          message={authError}
           duration={3000}
           color="danger"
         />

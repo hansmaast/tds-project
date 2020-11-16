@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client/core';
 
-const SUBSCRIBE_POSTS = gql`
+const SUBSCRIBE_HIKES = gql`
     subscription {
-        posts {
+        hikes {
             id
             title
             description
@@ -11,7 +11,18 @@ const SUBSCRIBE_POSTS = gql`
                 id
                 display_name
             }
+            length
+            start_point
+            end_point
+            comments {
+                id
+                text
+                post_id
+                user {
+                    display_name
+                }
+            }
         }
     }`;
 
-export default SUBSCRIBE_POSTS;
+export default SUBSCRIBE_HIKES;

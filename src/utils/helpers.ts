@@ -11,3 +11,9 @@ export const getFilenameForPhoto = (_photo: CameraPhoto): string => {
     return '';
   }
 };
+
+export const getLngLatFrom = ({ pointString }: { pointString: string }) : number[] => {
+  const endIndex = pointString.length - 1;
+  const lngLatString = pointString.substring(1, endIndex).split(',');
+  return lngLatString.map((s) => parseFloat(s));
+};

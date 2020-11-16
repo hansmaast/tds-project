@@ -2,7 +2,7 @@ import { CameraPhoto } from '@capacitor/core';
 import { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
-import { getFilenameForPhoto } from '../getFilenameForPhoto';
+import { getFilenameForPhoto } from '../helpers';
 import { IInsertPost } from '../../interfaces/Post/IInsertPost';
 import { auth, storage } from '../nhost';
 import { INSERT_POST } from '../graphql/mutations';

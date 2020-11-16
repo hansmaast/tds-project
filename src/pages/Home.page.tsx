@@ -9,29 +9,29 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
-import React from 'react';
-import { addOutline, logOutOutline } from 'ionicons/icons';
+import React, { useEffect } from 'react';
+import { addOutline, logOutOutline, map } from 'ionicons/icons';
 import { useSubscription } from '@apollo/client';
-import { useHistory } from 'react-router-dom';
-import PostCard from '../components/posts/PostCard';
-import { IPostList } from '../interfaces/Post/IPostList';
-import { auth } from '../utils/nhost';
-import SUBSCRIBE_POSTS from '../utils/graphql/subscriptions';
+import { useAuth } from 'react-nhost';
+import { useHistory } from 'react-router';
+import HHCard from '../components/posts/HHCard';
+import { IHikeList } from '../interfaces/Post/IHikeList';
+import SUBSCRIBE_HIKES from '../utils/graphql/subscriptions';
 import { APP_NAME } from '../utils/constants/strings';
+import { IHike } from '../interfaces/Post/IHike';
+import { useAuthentication } from '../utils/hooks/useAuthetication';
 
 export const HomePage = () => {
   const history = useHistory();
-  const { loading, data } = useSubscription<IPostList>(SUBSCRIBE_POSTS, {
+  const { signedIn } = useAuth();
+  const { authMethods: { logout } } = useAuthentication();
+  const { loading, data, error } = useSubscription<IHikeList>(SUBSCRIBE_HIKES, {
     fetchPolicy: 'no-cache',
   });
-  const logout = async () => {
-    try {
-      await auth.logout();
-      history.replace('/login');
-    } catch (e) {
-      console.error(e);
-    }
-  };
+
+  useEffect(() => {
+    console.log(error);
+  }, [error]);
 
   return (
     <IonPage>
@@ -46,19 +46,26 @@ export const HomePage = () => {
             { APP_NAME }
           </IonTitle>
           <IonButtons slot="end">
-            <IonButton onClick={() => logout()}>
-              <IonIcon icon={logOutOutline} size="medium" />
-            </IonButton>
+            { signedIn
+              ? (
+                <IonButton onClick={() => logout()}>
+                  <IonIcon icon={logOutOutline} size="medium" />
+                </IonButton>
+              ) : (
+                <IonButton onClick={() => history.push('/map')}>
+                  <IonIcon icon={map} size="medium" />
+                </IonButton>
+              )}
           </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         {
-          loading && <IonProgressBar type="indeterminate" />
-        }
+            loading && <IonProgressBar type="indeterminate" />
+          }
         {
-          data?.posts.map((post: any) => <PostCard key={post.id} post={post} />)
-        }
+            data?.hikes.map((hike: IHike) => <HHCard key={hike.id} hike={hike} />)
+          }
       </IonContent>
     </IonPage>
   );

@@ -3,18 +3,20 @@ import {
 } from '@ionic/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IPost } from '../../interfaces/Post/IPost';
+import { IHike } from '../../interfaces/Post/IHike';
 import { PUBLIC_STORAGE } from '../../utils/constants/urls';
 
 interface Props {
-  post: IPost
+  hike: IHike
 }
 
-const PostCard: React.FC<Props> = ({ post }) => {
+const HHCard: React.FC<Props> = ({ hike }) => {
   const {
-    id, user, title, description, publicPhotoPath,
-  } = post;
+    id, user, title, description, publicPhotoPath, length, start_point, end_point,
+  } = hike;
   const { display_name } = user;
+
+  console.log(start_point);
 
   return (
     <Link
@@ -22,7 +24,7 @@ const PostCard: React.FC<Props> = ({ post }) => {
       to={{
         pathname: `details/${id}`,
         state: {
-          post,
+          hike,
         },
       }}
     >
@@ -46,4 +48,4 @@ const PostCard: React.FC<Props> = ({ post }) => {
   );
 };
 
-export default PostCard;
+export default HHCard;

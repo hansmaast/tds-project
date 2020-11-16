@@ -21,3 +21,8 @@ align-items: ${(props) => props.alignItems};
 width: ${(props) => (props.fillParent ? '100%' : '')};
 height: ${(props) => (props.fillParent ? '100%' : '')};
 `;
+
+export const Map = styled('div')`
+width: 100%;
+height: 100%;
+`;

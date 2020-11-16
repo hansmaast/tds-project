@@ -1,88 +1,77 @@
-import React, { useEffect, useRef } from 'react';
-import { renderToString } from 'react-dom/server';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  IonCard, IonCardContent, IonContent, IonPage, useIonViewWillEnter,
+  IonButton, IonContent, IonLoading, IonPage,
 } from '@ionic/react';
-import { useHistory } from 'react-router-dom';
 import mapboxgl from 'mapbox-gl';
 import BackButtonHeader from '../components/headers/BackButtonHeader';
+import { Map } from '../components/style/Containers';
 import { MAPBOX_ACCESS_TOKEN } from '../utils/constants/secrets';
 import 'mapbox-gl/dist/mapbox-gl.css';
-
-const MarkerPopUp: React.FC = () => (
-  <IonCard>
-    <IonCardContent>
-      <h1>Hello World</h1>
-    </IonCardContent>
-  </IonCard>
-);
-
-const myPopUp = new mapboxgl.Popup().setHTML(renderToString(<MarkerPopUp />));
-
-const addMapControls = (toMap: mapboxgl.Map) => {
-  // add navigation control (the +/- zoom buttons)
-  toMap.addControl(new mapboxgl.NavigationControl(), 'top-right');
-
-  toMap.addControl(new mapboxgl.GeolocateControl({
-    positionOptions: {
-      enableHighAccuracy: true,
-    },
-    trackUserLocation: true,
-  }));
-};
+import { useMyPosition } from '../utils/hooks/useMyPosition';
+import { useSubscription } from '@apollo/client';
+import SUBSCRIBE_HIKES from '../utils/graphql/subscriptions';
+import { getLngLatFrom } from '../utils/helpers';
+import { addStartingMarkers } from '../utils/map/addStartingMarkers';
+import { addControls } from '../utils/map/addControls';
+import { IHike } from '../interfaces/Post/IHike';
+import { IHikeList } from '../interfaces/Post/IHikeList';
 
 export const MapPage = () => {
-  const history = useHistory();
-
+  const [map, setMap] = useState<mapboxgl.Map>();
   const mapRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
-  let map: mapboxgl.Map | null = null;
+  const { myPosition, tracker } = useMyPosition();
+  const { loading: loadingHikes, data: hikeData, error } = useSubscription<IHikeList>(SUBSCRIBE_HIKES, {
+    fetchPolicy: 'no-cache',
+  });
 
   useEffect(() => {
-    if (mapRef.current) {
-      map = new mapboxgl.Map({
+    if (mapRef.current && !map) {
+      setMap(new mapboxgl.Map({
         accessToken: MAPBOX_ACCESS_TOKEN,
         container: mapRef.current,
         style: 'mapbox://styles/mapbox/outdoors-v11',
         center: [10.748503539483494, 59.92003719905571],
         zoom: 10,
 
-      });
+      }));
     }
-    return () => {
-      map!.remove();
-    };
   }, [mapRef]);
 
-  useIonViewWillEnter(() => {
-    map!.resize();
-  }, []);
+  useEffect(() => {
+    if (map) addControls({ to: map });
+  }, [map]);
 
   useEffect(() => {
-    if (map) {
-      const marker = new mapboxgl.Marker()
-        .setLngLat([10.748503539483494, 59.92003719905571])
-        .setPopup(myPopUp)
-        .addTo(map);
-
-      addMapControls(map);
-
-      map.on('click', (e) => {
-        marker.setLngLat(e.lngLat);
-        console.log(`A click event has occurred at ${e.lngLat}`);
-      });
+    if (myPosition.isLoading && !myPosition.data) {
+      console.log('loading pos...');
     }
-
-    console.log(map);
-  }, [map]);
+    if (map && hikeData) {
+      map.resize();
+      addStartingMarkers({ from: hikeData, to: map });
+    }
+  }, [hikeData]);
 
   return (
     <IonPage>
       <BackButtonHeader defaultHref="/home" title="Hike Map" />
       <IonContent fullscreen>
-        <div
-          style={{ width: '100%', height: '100vh' }}
-          ref={mapRef}
-        />
+        <Map ref={mapRef} />
+        { loadingHikes
+          && (
+          <IonLoading
+            isOpen
+            message="Loading routes 🎒🌲🍂..."
+          />
+          )}
+        <IonButton
+          style={{
+            position: 'absolute', bottom: 20, left: '50%', transform: 'translate(-50%, 0)',
+          }}
+          onClick={() => (tracker.isTracking ? tracker.stop() : tracker.start())}
+        >
+          { tracker.isTracking ? 'Stop ' : 'Start '}
+          tracking
+        </IonButton>
       </IonContent>
     </IonPage>
   );
