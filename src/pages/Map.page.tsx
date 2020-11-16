@@ -10,20 +10,18 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { useMyPosition } from '../utils/hooks/useMyPosition';
 import { useSubscription } from '@apollo/client';
 import SUBSCRIBE_HIKES from '../utils/graphql/subscriptions';
-import { getLngLatFrom } from '../utils/helpers';
 import { addStartingMarkers } from '../utils/map/addStartingMarkers';
 import { addControls } from '../utils/map/addControls';
-import { IHike } from '../interfaces/Post/IHike';
 import { IHikeList } from '../interfaces/Post/IHikeList';
 
 export const MapPage = () => {
   const [map, setMap] = useState<mapboxgl.Map>();
-  const mapRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
   const { myPosition, tracker } = useMyPosition();
   const { loading: loadingHikes, data: hikeData, error } = useSubscription<IHikeList>(SUBSCRIBE_HIKES, {
     fetchPolicy: 'no-cache',
   });
 
+  const mapRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
   useEffect(() => {
     if (mapRef.current && !map) {
       setMap(new mapboxgl.Map({

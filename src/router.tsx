@@ -1,18 +1,19 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { IonRouterOutlet } from '@ionic/react';
-import PrivateRoute from './components/PrivateRoute';
 import * as pages from './pages';
+import { paths } from './utils/constants/paths';
 
 const Router: React.FC = () => (
   <IonRouterOutlet>
-    <Route path="/login" component={pages.Login} exact />
-    <Route path="/signup" component={pages.SignUp} exact />
-    <PrivateRoute path="/new-post" component={pages.NewHike} exact />
-    <Route path="/home" component={pages.Home} exact />
-    <Route path="/details/:id" component={pages.Detail} exact />
-    <Route path="/map" component={pages.MapPage} exact />
-    <Route path="/" component={pages.Landing} exact />
+    {/* Make Private */}
+    <Route path={paths.newHike} component={pages.NewHike} exact />
+    <Route path={paths.map} component={pages.MapPage} exact />
+    <Route path={paths.details} component={pages.Detail} exact />
+    <Route path={paths.home} component={pages.Home} exact />
+    <Route path={paths.signUp} component={pages.SignUp} exact />
+    <Route path={paths.login} component={pages.Login} exact />
+    <Route path={paths.landing} component={pages.Landing} exact />
   </IonRouterOutlet>
 );
 

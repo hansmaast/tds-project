@@ -20,6 +20,7 @@ import SUBSCRIBE_HIKES from '../utils/graphql/subscriptions';
 import { APP_NAME } from '../utils/constants/strings';
 import { IHike } from '../interfaces/Post/IHike';
 import { useAuthentication } from '../utils/hooks/useAuthetication';
+import { paths } from '../utils/constants/paths';
 
 export const Home = () => {
   const history = useHistory();
@@ -38,7 +39,7 @@ export const Home = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonButton routerLink="/new-post">
+            <IonButton routerLink={paths.newHike}>
               <IonIcon icon={addOutline} size="medium" />
             </IonButton>
           </IonButtons>
@@ -52,7 +53,7 @@ export const Home = () => {
                   <IonIcon icon={logOutOutline} size="medium" />
                 </IonButton>
               ) : (
-                <IonButton onClick={() => history.push('/map')}>
+                <IonButton onClick={() => history.push(paths.map)}>
                   <IonIcon icon={map} size="medium" />
                 </IonButton>
               )}

@@ -7,16 +7,17 @@ import { IHikeInsert } from '../../interfaces/Post/IHikeInsert';
 import { auth, storage } from '../nhost';
 import { INSERT_POST } from '../graphql/mutations';
 import { PUBLIC_STORAGE_DIR } from '../constants/urls';
+import { paths } from '../constants/paths';
 
-interface NewPostInsertProps {
+interface DbInsertProps {
   data: IHikeInsert;
   photo: CameraPhoto | undefined;
 }
 
-export const useHikeUpload = ({ data, photo }: { data: IHikeInsert, photo: CameraPhoto | undefined }) => {
+export const useDbInsert = ({ data, photo }: DbInsertProps) => {
   const [filename, setFilename] = useState<string | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
-  const [insertPostMutation] = useMutation(INSERT_POST);
+  const [insertMutation] = useMutation(INSERT_POST);
   const history = useHistory();
   const [uploadProgress, setUploadProgress] = useState(0);
 
@@ -48,7 +49,7 @@ export const useHikeUpload = ({ data, photo }: { data: IHikeInsert, photo: Camer
   const insertPost = async () => {
     if (filename) {
       try {
-        await insertPostMutation({
+        await insertMutation({
           variables: {
             post: {
               ...data,
@@ -73,7 +74,7 @@ export const useHikeUpload = ({ data, photo }: { data: IHikeInsert, photo: Camer
   useEffect(() => {
     if (uploadSuccess) {
       insertPost()
-        .then(() => history.replace('/home'))
+        .then(() => history.replace(paths.home))
         .catch((e) => console.error(e));
     }
   }, [uploadSuccess]);

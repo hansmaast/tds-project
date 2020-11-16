@@ -1,25 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   IonIcon,
   IonInput,
   IonLabel,
   IonList,
-  IonPage, IonRouterLink,
+  IonPage,
+  IonRouterLink,
   IonSpinner,
   IonToast,
   useIonViewWillEnter,
 } from '@ionic/react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { arrowForwardCircle } from 'ionicons/icons';
 import { auth } from '../utils/nhost';
 import { IonContentWithBackground } from '../components/style/IonContentWithBackground';
 import { Flex, Item } from '../components/style/Containers';
 import { LargeTitle, SubTitle } from '../components/style/Text';
-import { Button, RoundArrowButton } from '../components/style/Buttons';
+import { RoundArrowButton } from '../components/style/Buttons';
 import { Card } from '../components/style/Card';
 import { APP_NAME } from '../utils/constants/strings';
 import BackButtonHeader from '../components/headers/BackButtonHeader';
 import { useAuthentication } from '../utils/hooks/useAuthetication';
+import { paths } from '../utils/constants/paths';
 
 export const Login: React.FC = () => {
   const history = useHistory();
@@ -31,7 +33,7 @@ export const Login: React.FC = () => {
 
   useIonViewWillEnter(() => {
     if (auth.isAuthenticated()) {
-      history.replace('/home');
+      history.replace(paths.home);
     }
   });
 
@@ -78,7 +80,7 @@ export const Login: React.FC = () => {
           <SubTitle>Not signed up yet?</SubTitle>
           <SubTitle>No problem. Just press the link below.</SubTitle>
           <SubTitle>
-            <IonRouterLink onClick={() => history.replace('/signup')}>
+            <IonRouterLink onClick={() => history.replace(paths.signUp)}>
               Sign up
             </IonRouterLink>
           </SubTitle>

@@ -1,10 +1,11 @@
 import {
-  IonButton, IonCard, IonCardContent, IonContent, IonPage, IonTitle,
+  IonCard, IonCardContent, IonContent, IonPage,
 } from '@ionic/react';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Flex } from '../components/style/Containers';
 import { Button } from '../components/style/Buttons';
+import { paths } from '../utils/constants/paths';
 
 export const Landing = () => {
   const history = useHistory();
@@ -16,10 +17,10 @@ export const Landing = () => {
           <IonCard>
             <IonCardContent>
               <Flex column>
-                <Button margin="10pt 0 10pt 0" onClick={() => history.push('/login')}>Login</Button>
-                <Button margin="10pt 0 10pt 0" onClick={() => history.push('/signup')}>Sign Up</Button>
-                <Button margin="10pt 0 10pt 0" onClick={() => history.push('/map')}>Map</Button>
-                <Button margin="10pt 0 10pt 0" onClick={() => history.push('/home')}>Continue</Button>
+                <Button margin="10pt 0 10pt 0" onClick={() => history.push(paths.login)}>Login</Button>
+                <Button margin="10pt 0 10pt 0" onClick={() => history.push(paths.signUp)}>Sign Up</Button>
+                <Button margin="10pt 0 10pt 0" onClick={() => history.push(paths.map)}>Map</Button>
+                <Button margin="10pt 0 10pt 0" onClick={() => history.push(paths.home)}>Continue</Button>
               </Flex>
             </IonCardContent>
           </IonCard>
