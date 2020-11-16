@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { Flex } from '../components/style/Containers';
 import { Button } from '../components/style/Buttons';
 
-export const LandingPage = () => {
+export const Landing = () => {
   const history = useHistory();
 
   return (

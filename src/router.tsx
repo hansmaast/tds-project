@@ -6,13 +6,13 @@ import * as pages from './pages';
 
 const Router: React.FC = () => (
   <IonRouterOutlet>
-    <Route path="/login" component={pages.LoginPage} exact />
-    <Route path="/signup" component={pages.SignUpPage} exact />
-    <PrivateRoute path="/new-post" component={pages.NewPostPage} exact />
-    <Route path="/home" component={pages.HomePage} exact />
-    <Route path="/details/:id" component={pages.DetailPage} exact />
+    <Route path="/login" component={pages.Login} exact />
+    <Route path="/signup" component={pages.SignUp} exact />
+    <PrivateRoute path="/new-post" component={pages.NewHike} exact />
+    <Route path="/home" component={pages.Home} exact />
+    <Route path="/details/:id" component={pages.Detail} exact />
     <Route path="/map" component={pages.MapPage} exact />
-    <Route path="/" component={pages.LandingPage} exact />
+    <Route path="/" component={pages.Landing} exact />
   </IonRouterOutlet>
 );
 

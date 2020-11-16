@@ -21,7 +21,7 @@ import { APP_NAME } from '../utils/constants/strings';
 import BackButtonHeader from '../components/headers/BackButtonHeader';
 import { useAuthentication } from '../utils/hooks/useAuthetication';
 
-export const LoginPage: React.FC = () => {
+export const Login: React.FC = () => {
   const history = useHistory();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');

@@ -1,7 +1,7 @@
-export { LoginPage } from './Login.page';
-export { NewPostPage } from './NewPost.page';
-export { HomePage } from './Home.page';
-export { DetailPage } from './Detail.page';
-export { LandingPage } from './Landing.page';
-export { SignUpPage } from './SignUp.page';
+export { Login } from './Login.page';
+export { NewHike } from './NewHike.page';
+export { Home } from './Home.page';
+export { Detail } from './Detail.page';
+export { Landing } from './Landing.page';
+export { SignUp } from './SignUp.page';
 export { MapPage } from './Map.page';

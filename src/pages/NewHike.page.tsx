@@ -4,17 +4,11 @@ import {
   IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
 } from '@ionic/react';
 import { NewPost } from '../components/posts/NewPost';
+import BackButtonHeader from '../components/headers/BackButtonHeader';
 
-export const NewPostPage: React.FC = () => (
+export const NewHike: React.FC = () => (
   <IonPage>
-    <IonHeader>
-      <IonToolbar>
-        <IonButtons slot="start">
-          <IonBackButton defaultHref="/home" />
-        </IonButtons>
-        <IonTitle> New post</IonTitle>
-      </IonToolbar>
-    </IonHeader>
+    <BackButtonHeader title="Create a hiking route 🏔" defaultHref="/home" />
     <IonContent>
       <NewPost />
     </IonContent>

@@ -21,7 +21,7 @@ import { APP_NAME } from '../utils/constants/strings';
 import { IHike } from '../interfaces/Post/IHike';
 import { useAuthentication } from '../utils/hooks/useAuthetication';
 
-export const HomePage = () => {
+export const Home = () => {
   const history = useHistory();
   const { signedIn } = useAuth();
   const { authMethods: { logout } } = useAuthentication();

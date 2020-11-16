@@ -21,7 +21,7 @@ import { DELETE_POST } from '../utils/graphql/mutations';
 import { PUBLIC_STORAGE_DIR } from '../utils/constants/urls';
 import { APP_NAME } from '../utils/constants/strings';
 
-export const DetailPage: React.FC<any> = (props: any) => {
+export const Detail: React.FC<any> = (props: any) => {
   const { location } = props;
   const post: IHike = location?.state?.post;
   const [deletePostMutation] = useMutation(DELETE_POST);
