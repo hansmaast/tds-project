@@ -1,29 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  IonCard, IonIcon, IonInput, IonItem, IonLabel, IonProgressBar, IonTextarea, IonToast,
+  IonCard,
+  IonIcon,
+  IonInput,
+  IonItem,
+  IonLabel,
+  IonModal,
+  IonProgressBar,
+  IonTextarea,
+  IonToast,
 } from '@ionic/react';
-import { useHistory } from 'react-router';
 import { addOutline, cameraOutline } from 'ionicons/icons';
 import { usePhoto } from '../../utils/hooks/usePhoto';
 import placeHolderPhoto from '../../assets/placeholder-image.png';
 import { useDbInsert } from '../../utils/hooks/useDbInsert';
-import { Button, RoundArrowButton } from '../style/Buttons';
-import { SubTitle } from '../style/Text';
-import { Flex } from '../style/Containers';
-import { MapModal } from '../MapModal';
-import { useNewHike } from '../../utils/hooks/useNewHike';
+import { Button, RoundArrowButton } from '../../style/Buttons';
+import { SubTitle } from '../../style/Text';
+import { Flex } from '../../style/Containers';
+import { MapModalContent } from '../MapModalContent';
+import { IHikeInsert } from '../../interfaces/Post/IHikeInsert';
 
 export const CreateHike = () => {
-  const { newHike, setNewHike } = useNewHike();
-  const [showMapModal, setShowMapModal] = useState<boolean>(false);
+  const [newHike, setNewHike] = useState<IHikeInsert>({
+    description: '', end_point: '', length: 0, publicPhotoPath: '', start_point: '', title: '', user_id: '',
+  });
   const { photo, triggerCamera } = usePhoto();
-  const { startPostUpload, uploadProgress, uploadSuccess } = useDbInsert({ data: newHike, photo });
   const photoSrc = photo?.dataUrl ? photo.dataUrl : placeHolderPhoto;
-  const history = useHistory();
+  const { startPostUpload, uploadProgress, uploadSuccess } = useDbInsert({ data: newHike, photo });
+  const [showMapModal, setShowMapModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    console.log(JSON.stringify(newHike, null, 4));
+  }, [newHike]);
 
   return (
     <>
       <IonProgressBar value={uploadProgress / 100} />
+
       <Flex column justifyContent="space-between">
         <IonItem lines="full">
           <IonLabel position="floating">Title</IonLabel>
@@ -49,7 +62,10 @@ export const CreateHike = () => {
         </IonCard>
 
         <SubTitle>Press the camera icon to add a photo</SubTitle>
-        <Button onClick={() => setShowMapModal(true)} margin="12pt" width="50%" alignSelf="center">Set starting point</Button>
+        <Button onClick={() => setShowMapModal(true)} margin="12pt" width="50%" alignSelf="center">
+          Set starting
+          point
+        </Button>
       </Flex>
 
       <RoundArrowButton
@@ -57,8 +73,8 @@ export const CreateHike = () => {
         onClick={() => startPostUpload()}
         style={{ position: 'absolute', bottom: 20, left: 20 }}
       >
-        {/* isAuthenticating */}
-        {/* ? <IonSpinner name="crescent" /> */}
+        {/* isAuthenticating */ }
+        {/* ? <IonSpinner name="crescent" /> */ }
         <IonIcon icon={addOutline} />
       </RoundArrowButton>
 
@@ -69,7 +85,13 @@ export const CreateHike = () => {
         <IonIcon icon={cameraOutline} />
       </RoundArrowButton>
 
-      <MapModal showMapModal={showMapModal} setShowMapModal={setShowMapModal} />
+      <IonModal isOpen={showMapModal}>
+        <MapModalContent
+          setShowMapModal={setShowMapModal}
+          newHike={newHike}
+          setNewHike={setNewHike}
+        />
+      </IonModal>
 
       <IonToast
         isOpen={uploadSuccess}

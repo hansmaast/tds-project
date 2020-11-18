@@ -4,12 +4,12 @@ import {
 } from '@ionic/react';
 import mapboxgl from 'mapbox-gl';
 import BackButtonHeader from '../components/headers/BackButtonHeader';
-import { Map } from '../components/style/Containers';
+import { MapContainer } from '../style/Containers';
 import { MAPBOX_ACCESS_TOKEN } from '../utils/constants/secrets';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useMyPosition } from '../utils/hooks/useMyPosition';
 import { useSubscription } from '@apollo/client';
-import SUBSCRIBE_HIKES from '../utils/graphql/subscriptions';
+import { SUBSCRIBE_HIKES } from '../utils/graphql/subscriptions';
 import { addStartingMarkers } from '../utils/map/addStartingMarkers';
 import { addControls } from '../utils/map/addControls';
 import { IHikeList } from '../interfaces/Post/IHikeList';
@@ -53,7 +53,7 @@ export const MapPage = () => {
     <IonPage>
       <BackButtonHeader defaultHref="/home" title="Hike Map" />
       <IonContent fullscreen>
-        <Map ref={mapRef} />
+        <MapContainer ref={mapRef} />
         { loadingHikes
           && (
           <IonLoading

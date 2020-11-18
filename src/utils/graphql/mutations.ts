@@ -1,16 +1,14 @@
 import { gql } from '@apollo/client/core';
 
-export const INSERT_POST = gql`
-    mutation InsertPost($post: posts_insert_input!) {
-        insert_posts_one(object: $post) {
-            title
-            description
-            publicPhotoPath
-            user {
-                display_name
+export const INSERT_HIKE = gql`
+    mutation InsertHike($hike: hikes_insert_input!) {
+            insert_hikes_one(object: $hike) {
+                title
+                description
+                start_point
+                end_point
             }
-        }
-    }
+        }    
 `;
 
 export const DELETE_POST = gql`

@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { getFilenameForPhoto } from '../helpers';
 import { IHikeInsert } from '../../interfaces/Post/IHikeInsert';
 import { auth, storage } from '../nhost';
-import { INSERT_POST } from '../graphql/mutations';
+import { INSERT_HIKE } from '../graphql/mutations';
 import { PUBLIC_STORAGE_DIR } from '../constants/urls';
 import { paths } from '../constants/paths';
 
@@ -17,7 +17,7 @@ interface DbInsertProps {
 export const useDbInsert = ({ data, photo }: DbInsertProps) => {
   const [filename, setFilename] = useState<string | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
-  const [insertMutation] = useMutation(INSERT_POST);
+  const [insertMutation] = useMutation(INSERT_HIKE);
   const history = useHistory();
   const [uploadProgress, setUploadProgress] = useState(0);
 
@@ -46,18 +46,20 @@ export const useDbInsert = ({ data, photo }: DbInsertProps) => {
   };
 
   // uploads post when image is uploaded
-  const insertPost = async () => {
+  const insertData = async () => {
     if (filename) {
       try {
-        await insertMutation({
+        const { data: resData, errors } = await insertMutation({
           variables: {
-            post: {
+            hike: {
               ...data,
               user_id: auth.getClaim('x-hasura-user-id'),
               publicPhotoPath: filename,
             },
           },
         });
+        if (data) console.log('Gotsome data ->', resData);
+        if (errors) console.log('Got some errors ->', errors);
       } catch (e) {
         console.error(e);
       }
@@ -73,7 +75,7 @@ export const useDbInsert = ({ data, photo }: DbInsertProps) => {
   // triggers upload
   useEffect(() => {
     if (uploadSuccess) {
-      insertPost()
+      insertData()
         .then(() => history.replace(paths.home))
         .catch((e) => console.error(e));
     }
