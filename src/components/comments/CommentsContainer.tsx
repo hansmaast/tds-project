@@ -3,7 +3,7 @@ import React from 'react';
 import { useQuery } from '@apollo/client';
 import Comment from './Comment';
 import { SkeletonComment } from '../skeletons/SkelteonComment';
-import GET_POST_COMMENTS from '../../utils/graphql/queries';
+import { GET_POST_COMMENTS } from '../../utils/graphql/queries';
 import IComment from '../../interfaces/IComment';
 
 interface Props {

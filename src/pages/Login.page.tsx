@@ -13,11 +13,11 @@ import {
 import { useHistory } from 'react-router-dom';
 import { arrowForwardCircle } from 'ionicons/icons';
 import { auth } from '../utils/nhost';
-import { IonContentWithBackground } from '../components/style/IonContentWithBackground';
-import { Flex, Item } from '../components/style/Containers';
-import { LargeTitle, SubTitle } from '../components/style/Text';
-import { RoundArrowButton } from '../components/style/Buttons';
-import { Card } from '../components/style/Card';
+import { IonContentWithBackground } from '../style/IonContentWithBackground';
+import { Flex, Item } from '../style/Containers';
+import { LargeTitle, SubTitle } from '../style/Text';
+import { RoundArrowButton } from '../style/Buttons';
+import { Card } from '../style/Card';
 import { APP_NAME } from '../utils/constants/strings';
 import BackButtonHeader from '../components/headers/BackButtonHeader';
 import { useAuthentication } from '../utils/hooks/useAuthetication';

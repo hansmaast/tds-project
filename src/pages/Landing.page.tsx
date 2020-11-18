@@ -3,8 +3,8 @@ import {
 } from '@ionic/react';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Flex } from '../components/style/Containers';
-import { Button } from '../components/style/Buttons';
+import { Flex } from '../style/Containers';
+import { Button } from '../style/Buttons';
 import { paths } from '../utils/constants/paths';
 
 export const Landing = () => {

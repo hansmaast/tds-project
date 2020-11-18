@@ -16,11 +16,12 @@ import { useAuth } from 'react-nhost';
 import { useHistory } from 'react-router';
 import HHCard from '../components/posts/HHCard';
 import { IHikeList } from '../interfaces/Post/IHikeList';
-import SUBSCRIBE_HIKES from '../utils/graphql/subscriptions';
+import { SUBSCRIBE_HIKES } from '../utils/graphql/subscriptions';
 import { APP_NAME } from '../utils/constants/strings';
 import { IHike } from '../interfaces/Post/IHike';
 import { useAuthentication } from '../utils/hooks/useAuthetication';
 import { paths } from '../utils/constants/paths';
+import { Flex } from '../style/Containers';
 
 export const Home = () => {
   const history = useHistory();
@@ -61,12 +62,20 @@ export const Home = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        {
+        <Flex column alignItems="center">
+          {
             loading && <IonProgressBar type="indeterminate" />
           }
-        {
-            data?.hikes.map((hike: IHike) => <HHCard key={hike.id} hike={hike} />)
+          {
+            data?.hikes.map((hike: IHike) => (
+              <HHCard
+                key={hike.id}
+                hike={hike}
+                onClick={() => history.push(`/details/${hike.id}`)}
+              />
+            ))
           }
+        </Flex>
       </IonContent>
     </IonPage>
   );

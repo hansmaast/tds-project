@@ -24,6 +24,7 @@ module.exports = {
     '@typescript-eslint',
   ],
   rules: {
+    'implicit-arrow-linebreak': 'off',
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
     'import/prefer-default-export': 'off',

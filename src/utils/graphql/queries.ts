@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client/core';
 
-const GET_POST_COMMENTS = gql`
+export const GET_POST_COMMENTS = gql`
     query Comment($postId: Int!){
         comments(where: {post_id: {_eq: $postId}}) {
             id
@@ -13,4 +13,21 @@ const GET_POST_COMMENTS = gql`
     }
 `;
 
-export default GET_POST_COMMENTS;
+export const GET_HIKE_BY_ID = gql`
+    query GetHikeById($id: Int!) {
+        hikes(where: {id: {_eq: $id} }) {
+            id
+            title
+            description
+            publicPhotoPath
+            length
+            start_point
+            end_point
+            user {
+                id
+                display_name
+                avatar_url
+            }
+        }
+    }
+`;

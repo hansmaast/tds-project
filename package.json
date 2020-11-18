@@ -41,7 +41,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "ios": "ionic cap run ios --livereload --external\n",
-    "android": "ionic cap run android --livereload --external"
+    "android": "ionic cap run android --livereload --external",
+    "build:ios": "yarn build && ionic cap build ios",
+    "build:android": "yarn build && ionic cap build android"
   },
   "eslintConfig": {
     "extends": "react-app"

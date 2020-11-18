@@ -1,6 +1,7 @@
 import { CameraPhoto } from '@capacitor/core';
 import { LngLat } from 'mapbox-gl';
 import { auth } from './nhost';
+import { PUBLIC_STORAGE } from './constants/urls';
 
 export const getFilenameForPhoto = (_photo: CameraPhoto): string => {
   try {
@@ -20,3 +21,5 @@ export const getLngLat = ({ from: pointString }: { from: string }) : number[] =>
 };
 
 export const getPointString = ({ from: lngLat }: {from: LngLat}) : string => `(${lngLat.lng},${lngLat.lat})`;
+
+export const getPhotoUrl = ({ from: publicPhotoPath } : {from: string}) : string => PUBLIC_STORAGE + publicPhotoPath;
