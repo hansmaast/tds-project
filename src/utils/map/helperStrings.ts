@@ -5,11 +5,12 @@ export interface IHelperString {
 
 export const helperStrings: IHelperString[] = [
   {
-    sentence: 'Set a mark at the staring point 📍',
-    button: 'Next',
-  },
-  {
-    sentence: 'Now, please marker the end point 🏁',
+    sentence: 'Mark your route 🚶 📍‍️',
     button: 'Done',
   },
+  {
+    sentence: 'You need to do some marking before your done!‍️',
+    button: 'Done',
+  },
+
 ];

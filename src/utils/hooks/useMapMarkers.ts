@@ -1,17 +1,12 @@
-import mapboxgl, { LngLat } from 'mapbox-gl';
+import mapboxgl, { LngLat, LngLatLike } from 'mapbox-gl';
 import { useEffect, useState } from 'react';
+import { drawLine } from '../map/drawLine';
 
-interface props {
-  on: mapboxgl.Map | undefined
-}
-export const useMapMarkers = ({ on: mapInstance }: props) => {
-  const [startCoords, setStartCoords] = useState<LngLat>();
-  const [endCoords, setEndCoords] = useState<LngLat>();
-
-  const [startMarker] = useState(new mapboxgl.Marker());
-  const [endMarker] = useState(new mapboxgl.Marker());
-  const [startPointIsSet, setStartPointIsSet] = useState<boolean>(false);
-  const [endPointIsSet, setEndPointIsSet] = useState<boolean>(false);
+export const useMapMarkers = ({ on: mapInstance }: {on: mapboxgl.Map | undefined}) => {
+  const [coordinates, setCoordinates] = useState<LngLat[]>([]);
+  const [clickedCoord, setClickedCoord] = useState<LngLat>();
+  const [start] = useState(new mapboxgl.Marker({ color: 'blue' }));
+  const [end] = useState(new mapboxgl.Marker({ color: 'green' }));
 
   // adds controls and click listener to map
   useEffect(() => {
@@ -19,36 +14,47 @@ export const useMapMarkers = ({ on: mapInstance }: props) => {
       mapInstance.on('click', (e) => {
         handleSetMarker(e);
       });
-
-      // sets start marker if coords exists
-      if (startCoords) {
-        startMarker.setLngLat(startCoords as LngLat).addTo(mapInstance!);
-      }
     }
   }, [mapInstance]);
 
-  const handleSetMarker = (e: mapboxgl.MapMouseEvent & mapboxgl.EventData) => {
-    console.log('👆', `start point: ${startPointIsSet}`, `end point: ${endPointIsSet}`);
-
-    if (!startPointIsSet) {
-      console.log('Start point not set.. Gonna set it now!');
-      startMarker.setLngLat(e.lngLat).addTo(mapInstance!);
-      setStartCoords(e.lngLat);
-      setStartPointIsSet(true);
-    }
-
-    if (startPointIsSet && !endPointIsSet) {
-      console.log('Start point is set! Setting end point..');
-      endMarker.setLngLat(e.lngLat).addTo(mapInstance!);
-      setEndCoords(e.lngLat);
-      setEndPointIsSet(true);
-    }
+  const undoLast = () => {
+    const { length } = coordinates;
+    if (length === 0) return;
+    if (length === 1) start.remove();
+    if (length === 2) end.remove();
+    setCoordinates(coordinates.slice(0, length - 1));
   };
 
+  const handleSetMarker = (e: mapboxgl.MapMouseEvent & mapboxgl.EventData) => {
+    console.log('👆', e.lngLat);
+    console.log(e.lngLat);
+    setClickedCoord(e.lngLat);
+  };
+
+  useEffect(() => {
+    console.log('coors arr ->', coordinates);
+    const { length } = coordinates;
+    if (mapInstance && length > 0) {
+      start.setLngLat(coordinates[0] as LngLatLike).addTo(mapInstance);
+
+      if (length > 1) {
+        end.setLngLat(coordinates[length - 1] as LngLatLike).addTo(mapInstance);
+      }
+
+      drawLine(coordinates, mapInstance);
+    }
+  }, [coordinates, mapInstance]);
+
+  useEffect(() => {
+    if (!mapInstance) return;
+
+    setCoordinates([...coordinates, clickedCoord!]);
+  }, [clickedCoord]);
+
   return {
-    coords: {
-      start: startCoords,
-      end: endCoords,
+    markers: {
+      coordinates,
+      undoLast,
     },
   };
 };

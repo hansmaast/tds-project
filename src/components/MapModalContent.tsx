@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { IonButton, IonLoading } from '@ionic/react';
+import {
+  IonButton, IonFabButton, IonIcon, IonLoading,
+} from '@ionic/react';
+import { arrowUndoCircleOutline } from 'ionicons/icons';
 import { MapContainer } from '../style/Containers';
 import { getPointString } from '../utils/helpers';
 import { IHikeInsert } from '../interfaces/Post/IHikeInsert';
@@ -18,16 +21,12 @@ export const MapModalContent = ({
 }: MapModalProps) => {
   const mapRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
   const { map } = useMapInstance({ in: mapRef });
-  const { coords } = useMapMarkers({ on: map.instance });
+  const { markers: { coordinates, undoLast } } = useMapMarkers({ on: map.instance });
+  const { length: coordinateArrayLength } = coordinates;
+
   const [mapTranslateX, setMapTranslateX] = useState<string>('100%');
   const [animationDuration] = useState(150);
   const [helperString, setHelperString] = useState<IHelperString>(helperStrings[0]);
-
-  function translateMap({ to: translateX, after: ms }: { to: string, after: number }) {
-    setTimeout(() => {
-      setMapTranslateX(translateX);
-    }, ms);
-  }
 
   useEffect(() => {
     // animates map into view
@@ -35,29 +34,27 @@ export const MapModalContent = ({
   },
   []); // eslint-disable react-hooks/exhaustive-deps
 
-  const handleButtonTap = () => {
-    if (coords.start && !coords.end && helperString.button !== 'Done') {
-      translateMap({ to: '100%', after: 0 });
-      // displays a new message to the user
-      setHelperString(helperStrings[1]);
-      setTimeout(() => {
-        map.reInit();
-        translateMap({ to: '0%', after: 0 });
-      }, animationDuration);
-    } else {
-      console.warn('No start coords set!');
-    }
+  function translateMap({ to: translateX, after: ms }: { to: string, after: number }) {
+    setTimeout(() => {
+      setMapTranslateX(translateX);
+    }, ms);
+  }
 
-    // sets parents state
-    if (coords.start && coords.end) {
+  const handleButtonTap = () => {
+    // Todo: need to update the db to accept lots of coords
+    // Todo: create a boolean isDoneMarking (or something)
+    if (coordinateArrayLength > 1) {
+      const startPoint = coordinates[0];
+      const endPoint = coordinates[coordinateArrayLength - 1];
       setNewHike({
         ...newHike,
-        start_point: getPointString({ from: coords.start }),
-        end_point: getPointString({ from: coords.end }),
+        start_point: getPointString({ from: startPoint }),
+        end_point: getPointString({ from: endPoint }),
       });
       setShowMapModal(false);
     } else {
-      console.warn('Some coords is null!', coords.start, coords.end);
+      setHelperString(helperStrings[1]);
+      console.warn('Check your coords!!', coordinates);
     }
   };
 
@@ -73,6 +70,9 @@ export const MapModalContent = ({
       />
       <IonLoading showBackdrop={false} isOpen={mapTranslateX !== '0%'} />
       <p style={{ margin: '1em auto 1em auto' }}>{ helperString.sentence }</p>
+      <IonFabButton onClick={undoLast}>
+        <IonIcon icon={arrowUndoCircleOutline} />
+      </IonFabButton>
       <IonButton onClick={handleButtonTap}>{ helperString.button }</IonButton>
     </>
   );
