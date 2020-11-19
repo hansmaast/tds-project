@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { IonItem } from '@ionic/react';
+import { motion } from 'framer-motion';
 
 export const Item = styled(IonItem)`
  border-radius: 7px;
@@ -22,7 +23,7 @@ width: ${(props) => (props.fillParent ? '100%' : '')};
 height: ${(props) => (props.fillParent ? '100%' : '')};
 `;
 
-export const MapContainer = styled('div')`
+export const MapContainer = styled(motion.div)`
 width: 100%;
 height: 100%;
 `;

@@ -1,11 +1,13 @@
 import {
   IonCard, IonCardContent, IonContent, IonPage,
 } from '@ionic/react';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useSubscription } from '@apollo/client';
 import { Flex } from '../style/Containers';
-import { Button } from '../style/Buttons';
+import { Button, RoundedButton } from '../style/Buttons';
 import { paths } from '../utils/constants/paths';
+import { ButtonWithAnimation } from '../components/buttons/ButtonWithAnimation';
 
 export const Landing = () => {
   const history = useHistory();
@@ -16,11 +18,11 @@ export const Landing = () => {
         <Flex fillParent column justifyContent="center">
           <IonCard>
             <IonCardContent>
-              <Flex column>
-                <Button margin="10pt 0 10pt 0" onClick={() => history.push(paths.login)}>Login</Button>
-                <Button margin="10pt 0 10pt 0" onClick={() => history.push(paths.signUp)}>Sign Up</Button>
-                <Button margin="10pt 0 10pt 0" onClick={() => history.push(paths.map)}>Map</Button>
-                <Button margin="10pt 0 10pt 0" onClick={() => history.push(paths.home)}>Continue</Button>
+              <Flex column fillParent alignItems="center">
+                <ButtonWithAnimation text="Login" linkTo={paths.login} />
+                <ButtonWithAnimation text="Sign up" linkTo={paths.signUp} />
+                <ButtonWithAnimation text="Map" linkTo={paths.map} />
+                <ButtonWithAnimation text="Continue" linkTo={paths.home} />
               </Flex>
             </IonCardContent>
           </IonCard>

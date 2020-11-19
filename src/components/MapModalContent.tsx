@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl, { LngLat, MapboxOptions } from 'mapbox-gl';
-import { IonButton } from '@ionic/react';
+import { IonButton, IonLoading } from '@ionic/react';
 import { MAPBOX_ACCESS_TOKEN } from '../utils/constants/secrets';
 import { MapContainer } from '../style/Containers';
 import { addControls } from '../utils/map/addControls';
@@ -29,13 +29,21 @@ export const MapModalContent = ({
 
   const [helperString, setHelperString] = useState<IHelperString>(helperStrings[0]);
   const mapRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
+  const [mapTranslateX, setMapTranslateX] = useState<string>('100%');
+  const [animationDuration] = useState(150);
 
-  useEffect(() =>
-  // Removes the map and its resources when modal is unMounted
-    () => {
+  useEffect(() => {
+    // animates map into view
+    setTimeout(() => {
+      setMapTranslateX('0%');
+    }, animationDuration * 6);
+
+    // Removes the map and its resources when modal is unMounted
+    return () => {
       if (mapInstance) mapInstance.remove();
       console.log('Map removed!');
-    },
+    };
+  },
   []); // eslint-disable react-hooks/exhaustive-deps
 
   // sets map options
@@ -85,6 +93,9 @@ export const MapModalContent = ({
   const reInitMap = () => {
     mapInstance!.remove();
     setMapInstance(new mapboxgl.Map(mapOptions));
+    setTimeout(() => {
+      setMapTranslateX('0%');
+    }, animationDuration * 4);
   };
 
   const handleSetMarker = (e: mapboxgl.MapMouseEvent & mapboxgl.EventData) => {
@@ -107,10 +118,13 @@ export const MapModalContent = ({
   };
 
   const handleButtonTap = () => {
-    if (startCoords) {
+    if (startCoords && !endCoords && helperString.button !== 'Done') {
+      setMapTranslateX('100%');
       // displays a new message to the user
       setHelperString(helperStrings[1]);
-      reInitMap();
+      setTimeout(() => {
+        reInitMap();
+      }, animationDuration);
     } else {
       console.warn('No start coords set!');
     }
@@ -130,7 +144,15 @@ export const MapModalContent = ({
 
   return (
     <>
-      <MapContainer ref={(e) => mapRef.current = e} />
+      <MapContainer
+        ref={mapRef}
+        animate={{ x: mapTranslateX }}
+        transition={{
+          duration: animationDuration / 1000,
+          ease: 'easeOut',
+        }}
+      />
+      <IonLoading showBackdrop={false} isOpen={mapTranslateX !== '0%'} />
       <p style={{ margin: '1em auto 1em auto' }}>{ helperString.sentence }</p>
       <IonButton onClick={handleButtonTap}>{ helperString.button }</IonButton>
     </>
