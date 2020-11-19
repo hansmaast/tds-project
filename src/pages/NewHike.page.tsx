@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react';
 import { IonContent, IonPage, IonRouterOutlet } from '@ionic/react';
-import { CreateHike } from '../components/posts/CreateHike';
-import BackButtonHeader from '../components/headers/BackButtonHeader';
+import { CreateHike } from '../components/CreateHike';
+import BackButtonHeader from '../components/BackButtonHeader';
 
 export const NewHike: React.FC = () => (
   <IonPage>

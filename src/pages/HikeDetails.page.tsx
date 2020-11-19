@@ -6,7 +6,8 @@ import {
   IonButtons,
   IonContent,
   IonHeader,
-  IonIcon, IonLoading,
+  IonIcon,
+  IonLoading,
   IonPage,
   IonTitle,
   IonToolbar,
@@ -14,14 +15,13 @@ import {
 import { useMutation, useQuery } from '@apollo/client';
 import { trashBinOutline } from 'ionicons/icons';
 import { useParams } from 'react-router';
-import HHCard from '../components/posts/HHCard';
-import CommentsContainer from '../components/comments/CommentsContainer';
-import { IHike } from '../interfaces/Post/IHike';
+import CommentsContainer from '../components/CommentsContainer';
+import { IHike } from '../types';
 import { auth, storage } from '../utils/nhost';
-import { DELETE_POST } from '../utils/graphql/mutations';
+import { DELETE_POST } from '../graphql/mutations';
 import { PUBLIC_STORAGE_DIR } from '../utils/constants/urls';
 import { APP_NAME } from '../utils/constants/strings';
-import { GET_HIKE_BY_ID } from '../utils/graphql/queries';
+import { GET_HIKE_BY_ID } from '../graphql/queries';
 import { Flex } from '../style/Containers';
 import { getPhotoUrl } from '../utils/helpers';
 

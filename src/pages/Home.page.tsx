@@ -14,12 +14,11 @@ import { addOutline, logOutOutline, map } from 'ionicons/icons';
 import { useSubscription } from '@apollo/client';
 import { useAuth } from 'react-nhost';
 import { useHistory } from 'react-router';
-import HHCard from '../components/posts/HHCard';
-import { IHikeList } from '../interfaces/Post/IHikeList';
-import { SUBSCRIBE_HIKES } from '../utils/graphql/subscriptions';
+import HHCard from '../components/HHCard';
+import { SUBSCRIBE_HIKES } from '../graphql/subscriptions';
 import { APP_NAME } from '../utils/constants/strings';
-import { IHike } from '../interfaces/Post/IHike';
-import { useAuthentication } from '../utils/hooks/useAuthetication';
+import { IHike, IHikeList } from '../types';
+import { useAuthentication } from '../hooks/useAuthetication';
 import { paths } from '../utils/constants/paths';
 import { Flex } from '../style/Containers';
 

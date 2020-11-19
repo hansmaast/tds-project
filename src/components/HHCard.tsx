@@ -1,12 +1,11 @@
 import {
-  IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonItem,
+  IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,
 } from '@ionic/react';
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { IHike } from '../../interfaces/Post/IHike';
-import { PUBLIC_STORAGE } from '../../utils/constants/urls';
-import { Card } from '../../style/Card';
-import { getPhotoUrl } from '../../utils/helpers';
+import { useHistory } from 'react-router-dom';
+import { IHike } from '../types';
+import { Card } from '../style/Card';
+import { getPhotoUrl } from '../utils/helpers';
 
 interface Props {
   hike: IHike

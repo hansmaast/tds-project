@@ -2,9 +2,9 @@ import { IonCardSubtitle, IonList } from '@ionic/react';
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import Comment from './Comment';
-import { SkeletonComment } from '../skeletons/SkelteonComment';
-import { GET_POST_COMMENTS } from '../../utils/graphql/queries';
-import IComment from '../../interfaces/IComment';
+import { SkeletonComment } from './SkelteonComment';
+import { GET_POST_COMMENTS } from '../graphql/queries';
+import IComment from '../types';
 
 interface Props {
   postId: number

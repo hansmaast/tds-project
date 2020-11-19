@@ -5,10 +5,10 @@ import {
 import { arrowUndoCircleOutline } from 'ionicons/icons';
 import { MapContainer } from '../style/Containers';
 import { getPointString } from '../utils/helpers';
-import { IHikeInsert } from '../interfaces/Post/IHikeInsert';
 import { helperStrings, IHelperString } from '../utils/map/helperStrings';
-import { useMapInstance } from '../utils/hooks/useMapInstance';
-import { useMapMarkers } from '../utils/hooks/useMapMarkers';
+import { useMapInstance } from '../hooks/useMapInstance';
+import { useMapMarkers } from '../hooks/useMapMarkers';
+import { IHikeInsert } from '../types';
 
 interface MapModalProps {
   newHike: IHikeInsert;

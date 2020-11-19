@@ -1,9 +1,9 @@
 import mapboxgl, { LngLatLike } from 'mapbox-gl';
 import { renderToStaticMarkup } from 'react-dom/server';
 import React from 'react';
-import { IHikeList } from '../../interfaces/Post/IHikeList';
 import { MarkerPopUp } from '../../components/MarkerPopUp';
 import { getLngLat } from '../helpers';
+import { IHikeList } from '../../types';
 
 export function addStartingMarkers({ from: data, to: map }: { from: IHikeList, to: mapboxgl.Map }) {
   data.hikes.forEach((hike) => {

@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import React, { useState } from 'react';
-import { RoundedButton } from '../../style/Buttons';
+import { RoundedButton } from '../style/Buttons';
 
 export const ButtonWithAnimation = ({ text, linkTo }: {text: string, linkTo: string}) => {
   const history = useHistory();

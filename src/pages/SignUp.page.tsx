@@ -19,8 +19,8 @@ import { LargeTitle, SubTitle } from '../style/Text';
 import { RoundArrowButton } from '../style/Buttons';
 import { Card } from '../style/Card';
 import { APP_NAME } from '../utils/constants/strings';
-import BackButtonHeader from '../components/headers/BackButtonHeader';
-import { useAuthentication } from '../utils/hooks/useAuthetication';
+import BackButtonHeader from '../components/BackButtonHeader';
+import { useAuthentication } from '../hooks/useAuthetication';
 import { paths } from '../utils/constants/paths';
 
 export const SignUp: React.FC = () => {

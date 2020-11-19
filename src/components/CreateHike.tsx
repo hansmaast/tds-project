@@ -11,14 +11,14 @@ import {
   IonToast,
 } from '@ionic/react';
 import { addOutline, cameraOutline } from 'ionicons/icons';
-import { usePhoto } from '../../utils/hooks/usePhoto';
-import placeHolderPhoto from '../../assets/placeholder-image.png';
-import { useDbInsert } from '../../utils/hooks/useDbInsert';
-import { Button, RoundArrowButton } from '../../style/Buttons';
-import { SubTitle } from '../../style/Text';
-import { Flex } from '../../style/Containers';
-import { MapModalContent } from '../MapModalContent';
-import { IHikeInsert } from '../../interfaces/Post/IHikeInsert';
+import { usePhoto } from '../hooks/usePhoto';
+import placeHolderPhoto from '../assets/placeholder-image.png';
+import { useDbInsert } from '../hooks/useDbInsert';
+import { Button, RoundArrowButton } from '../style/Buttons';
+import { SubTitle } from '../style/Text';
+import { Flex } from '../style/Containers';
+import { MapModalContent } from './MapModalContent';
+import { IHikeInsert } from '../types';
 
 export const CreateHike = () => {
   const [newHike, setNewHike] = useState<IHikeInsert>({

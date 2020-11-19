@@ -12,7 +12,6 @@ export const drawLine = (coordinates: mapboxgl.LngLat[], mapInstance: mapboxgl.M
     mapInstance.addLayer(routeLine);
   }
   if (routeSrc) {
-    console.log('Source ->', routeSrc);
     routeSrc.setData(geoJson.data.features[0] as Feature);
   }
 };

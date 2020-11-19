@@ -2,12 +2,12 @@ import { CameraPhoto } from '@capacitor/core';
 import { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
-import { getFilenameForPhoto } from '../helpers';
-import { IHikeInsert } from '../../interfaces/Post/IHikeInsert';
-import { auth, storage } from '../nhost';
+import { getFilenameForPhoto } from '../utils/helpers';
+import { auth, storage } from '../utils/nhost';
 import { INSERT_HIKE } from '../graphql/mutations';
-import { PUBLIC_STORAGE_DIR } from '../constants/urls';
-import { paths } from '../constants/paths';
+import { PUBLIC_STORAGE_DIR } from '../utils/constants/urls';
+import { paths } from '../utils/constants/paths';
+import { IHikeInsert } from '../types';
 
 interface DbInsertProps {
   data: IHikeInsert;

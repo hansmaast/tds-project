@@ -2,7 +2,7 @@ import {
   IonAvatar, IonItem, IonLabel, IonTextarea,
 } from '@ionic/react';
 import React from 'react';
-import IComment from '../../interfaces/IComment';
+import IComment from '../types';
 
 interface Props {
   comment: IComment

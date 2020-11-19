@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { auth } from '../nhost';
-import { paths } from '../constants/paths';
+import { auth } from '../utils/nhost';
+import { paths } from '../utils/constants/paths';
 
 export const useAuthentication = () => {
   const history = useHistory();

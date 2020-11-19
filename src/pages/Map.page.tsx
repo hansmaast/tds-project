@@ -3,13 +3,13 @@ import {
   IonButton, IonContent, IonLoading, IonPage,
 } from '@ionic/react';
 import { useSubscription } from '@apollo/client';
-import { SUBSCRIBE_HIKES } from '../utils/graphql/subscriptions';
-import { useMapInstance } from '../utils/hooks/useMapInstance';
-import { useMyPosition } from '../utils/hooks/useMyPosition';
-import { IHikeList } from '../interfaces/Post/IHikeList';
+import { SUBSCRIBE_HIKES } from '../graphql/subscriptions';
+import { useMapInstance } from '../hooks/useMapInstance';
+import { useMyPosition } from '../hooks/useMyPosition';
 import { addStartingMarkers } from '../utils/map/addStartingMarkers';
 import { MapContainer } from '../style/Containers';
-import BackButtonHeader from '../components/headers/BackButtonHeader';
+import BackButtonHeader from '../components/BackButtonHeader';
+import { IHikeList } from '../types';
 
 export const MapPage = () => {
   const mapRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);

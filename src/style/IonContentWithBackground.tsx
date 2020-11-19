@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { IonContent } from '@ionic/react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import React from 'react';
-import WaveBlob from '../components/icons/WaveBlob';
+import WaveBlob from '../assets/icons/WaveBlob';
 
 const waveBlobString = encodeURIComponent(renderToStaticMarkup(<WaveBlob />));
 

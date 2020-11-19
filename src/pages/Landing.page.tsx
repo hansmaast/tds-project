@@ -1,13 +1,11 @@
 import {
   IonCard, IonCardContent, IonContent, IonPage,
 } from '@ionic/react';
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useSubscription } from '@apollo/client';
 import { Flex } from '../style/Containers';
-import { Button, RoundedButton } from '../style/Buttons';
 import { paths } from '../utils/constants/paths';
-import { ButtonWithAnimation } from '../components/buttons/ButtonWithAnimation';
+import { ButtonWithAnimation } from '../components/ButtonWithAnimation';
 
 export const Landing = () => {
   const history = useHistory();
