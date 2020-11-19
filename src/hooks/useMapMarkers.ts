@@ -1,7 +1,7 @@
 import mapboxgl, { LngLat, LngLatLike } from 'mapbox-gl';
 import { useEffect, useState } from 'react';
 import { drawLine } from '../utils/map/drawLine';
-import { getTotalDistanceInMeters } from '../utils/map/getDistance ';
+import { getTotalDistanceInMeters } from '../utils/map/getDistance';
 
 export const useMapMarkers = ({ on: mapInstance }: {on: mapboxgl.Map | undefined}) => {
   const [coordinates, setCoordinates] = useState<LngLat[]>([]);
@@ -38,6 +38,7 @@ export const useMapMarkers = ({ on: mapInstance }: {on: mapboxgl.Map | undefined
     if (mapInstance && length > 0) {
       start.setLngLat(coordinates[0] as LngLatLike).addTo(mapInstance);
 
+      // Todo: put this in state? display and store in db
       const distanceInMeters = getTotalDistanceInMeters({ from: coordinates });
       console.log('Meters: ', distanceInMeters);
       if (length > 1) {
