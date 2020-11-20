@@ -59,7 +59,7 @@ export const useDbInsert = ({ data, photo }: DbInsertProps) => {
           },
         });
         if (data) console.log('Got some data ->', resData);
-        if (errors) console.log('Got some errors ->', errors);
+        if (errors) console.warn('Got some errors ->', errors);
       } catch (e) {
         console.error(e);
       }

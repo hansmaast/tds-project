@@ -6,6 +6,7 @@ import { getTotalDistanceInMeters } from '../utils/map/getDistance';
 export const useMapMarkers = ({ on: mapInstance }: {on: mapboxgl.Map | undefined}) => {
   const [coordinates, setCoordinates] = useState<LngLat[]>([]);
   const [clickedCoord, setClickedCoord] = useState<LngLat>();
+  const [totalDistanceInMeters, setTotalDistanceInMeters] = useState<number>(0);
   const [start] = useState(new mapboxgl.Marker({ color: 'blue' }));
   const [end] = useState(new mapboxgl.Marker({ color: 'green' }));
 
@@ -40,6 +41,7 @@ export const useMapMarkers = ({ on: mapInstance }: {on: mapboxgl.Map | undefined
 
       // Todo: put this in state? display and store in db
       const distanceInMeters = getTotalDistanceInMeters({ from: coordinates });
+      setTotalDistanceInMeters(distanceInMeters);
       console.log('Meters: ', distanceInMeters);
       if (length > 1) {
         end.setLngLat(coordinates[length - 1] as LngLatLike).addTo(mapInstance);
@@ -60,5 +62,6 @@ export const useMapMarkers = ({ on: mapInstance }: {on: mapboxgl.Map | undefined
       coordinates,
       undoLast,
     },
+    totalDistanceInMeters,
   };
 };

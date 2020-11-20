@@ -5,12 +5,16 @@ export const INSERT_HIKE = gql`
             insert_hikes_one(object: $hike) {
                 title
                 description
-                start_point
-                end_point
+                coordinates {
+                    hike_id
+                    lng_lat
+                    index
+                }
             }
         }    
 `;
 
+// Todo: Change this..
 export const DELETE_POST = gql`
     mutation DeletePost($id: Int!){
         delete_comments (

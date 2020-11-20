@@ -20,10 +20,16 @@ import { Flex } from '../style/Containers';
 import { MapModalContent } from './MapModalContent';
 import { IHikeInsert } from '../types';
 
+const initialState: IHikeInsert = {
+  coordinates: { data: undefined },
+  description: '',
+  length: 0,
+  publicPhotoPath: '',
+  title: '',
+  user_id: '',
+};
 export const CreateHike = () => {
-  const [newHike, setNewHike] = useState<IHikeInsert>({
-    description: '', end_point: '', length: 0, publicPhotoPath: '', start_point: '', title: '', user_id: '',
-  });
+  const [newHike, setNewHike] = useState<IHikeInsert>(initialState);
   const { photo, triggerCamera } = usePhoto();
   const photoSrc = photo?.dataUrl ? photo.dataUrl : placeHolderPhoto;
   const { startPostUpload, uploadProgress, uploadSuccess } = useDbInsert({ data: newHike, photo });

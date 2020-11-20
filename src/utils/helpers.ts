@@ -1,7 +1,8 @@
 import { CameraPhoto } from '@capacitor/core';
-import { LngLat } from 'mapbox-gl';
+import mapboxgl, { LngLat } from 'mapbox-gl';
 import { auth } from './nhost';
 import { PUBLIC_STORAGE } from './constants/urls';
+import { IdbCoords } from '../types';
 
 export const getFilenameForPhoto = (_photo: CameraPhoto): string => {
   try {
@@ -21,6 +22,13 @@ export const getLngLat = (
   const lngLatString = pointString.substring(1, endIndex).split(',');
   return lngLatString.map((s) => parseFloat(s));
 };
+
+export const getIdbCoords = (
+  { from: coordinates }: {from: mapboxgl.LngLat[] },
+): IdbCoords[] => coordinates.map((c, i) => ({
+  lng_lat: getPointString({ from: c }),
+  index: i,
+} as IdbCoords));
 
 export const getPointString = (
   { from: lngLat }: {from: LngLat},

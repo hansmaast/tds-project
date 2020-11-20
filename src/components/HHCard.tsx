@@ -15,11 +15,10 @@ interface Props {
 const HHCard: React.FC<Props> = ({ hike, onClick }) => {
   const history = useHistory();
   const {
-    id, user, title, description, publicPhotoPath, length, start_point, end_point,
+    id, user, title, description, publicPhotoPath, length: meters,
   } = hike;
   const { display_name } = user;
-
-  console.log(start_point);
+  const km = (meters / 1000).toFixed(3);
 
   return (
     <Card onClick={onClick}>
@@ -36,7 +35,7 @@ const HHCard: React.FC<Props> = ({ hike, onClick }) => {
       </IonCardHeader>
       <IonCardContent>
         <p>
-          {`Length: ${length} km`}
+          {`Length: ${km} km`}
         </p>
         {description}
       </IonCardContent>

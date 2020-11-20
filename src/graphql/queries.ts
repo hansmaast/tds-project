@@ -21,8 +21,11 @@ export const GET_HIKE_BY_ID = gql`
             description
             publicPhotoPath
             length
-            start_point
-            end_point
+            coordinates {
+                hike_id
+                lng_lat
+                index
+            }
             user {
                 id
                 display_name

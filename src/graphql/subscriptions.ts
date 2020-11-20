@@ -7,13 +7,16 @@ export const SUBSCRIBE_HIKES = gql`
             title
             description
             publicPhotoPath
+            length
+            coordinates {
+                hike_id
+                lng_lat
+                index
+            }
             user {
                 id
                 display_name
             }
-            length
-            start_point
-            end_point
             comments {
                 id
                 text

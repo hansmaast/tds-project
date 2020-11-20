@@ -3,12 +3,13 @@ import {
   IonButton, IonFabButton, IonIcon, IonLoading,
 } from '@ionic/react';
 import { arrowUndoCircleOutline } from 'ionicons/icons';
+import mapboxgl from 'mapbox-gl';
 import { MapContainer } from '../style/Containers';
-import { getPointString } from '../utils/helpers';
+import { getIdbCoords, getPointString } from '../utils/helpers';
 import { helperStrings, IHelperString } from '../utils/map/helperStrings';
 import { useMapInstance } from '../hooks/useMapInstance';
 import { useMapMarkers } from '../hooks/useMapMarkers';
-import { IHikeInsert } from '../types';
+import { IdbCoords, IHikeInsert } from '../types';
 
 interface MapModalProps {
   newHike: IHikeInsert;
@@ -21,7 +22,10 @@ export const MapModalContent = ({
 }: MapModalProps) => {
   const mapRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
   const { map } = useMapInstance({ in: mapRef });
-  const { markers: { coordinates, undoLast } } = useMapMarkers({ on: map.instance });
+  const {
+    markers: { coordinates, undoLast },
+    totalDistanceInMeters,
+  } = useMapMarkers({ on: map.instance });
   const { length: coordinateArrayLength } = coordinates;
 
   const [mapTranslateX, setMapTranslateX] = useState<string>('100%');
@@ -44,12 +48,10 @@ export const MapModalContent = ({
     // Todo: need to update the db to accept lots of coords
     // Todo: create a boolean isDoneMarking (or something)
     if (coordinateArrayLength > 1) {
-      const startPoint = coordinates[0];
-      const endPoint = coordinates[coordinateArrayLength - 1];
       setNewHike({
         ...newHike,
-        start_point: getPointString({ from: startPoint }),
-        end_point: getPointString({ from: endPoint }),
+        length: totalDistanceInMeters,
+        coordinates: { data: getIdbCoords({ from: coordinates }) },
       });
       setShowMapModal(false);
     } else {

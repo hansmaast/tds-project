@@ -1,15 +1,3 @@
-export interface IUser {
-  id: string;
-  display_name: string;
-}
-
-export default interface IComment {
-  id: number;
-  post_id: number;
-  text: string;
-  user: IUser;
-};
-
 export interface IHike {
   id: number;
   title: string;
@@ -17,22 +5,38 @@ export interface IHike {
   publicPhotoPath: string;
   user: IUser;
   length: number;
-  start_point: string;
-  end_point: string;
   comments: IComment[];
-}
-
-export interface IHikeInsert {
-  user_id: string;
-  title: string;
-  description: string;
-  start_point: string;
-  end_point: string;
-  length: number;
-
-  publicPhotoPath: string;
+  coordinates: IdbCoords[];
 }
 
 export interface IHikeList {
   hikes: IHike[];
+}
+
+export interface IHikeInsert {
+  title: string;
+  description: string;
+  user_id: string;
+  publicPhotoPath: string;
+  length: number;
+  coordinates: {
+    data: IdbCoords[] | undefined
+  }
+}
+
+export interface IdbCoords {
+  lng_lat: string;
+  index: number;
+}
+
+export default interface IComment {
+  id: number;
+  post_id: number;
+  text: string;
+  user: IUser;
+}
+
+export interface IUser {
+  id: string;
+  display_name: string;
 }
