@@ -6,7 +6,7 @@ import { useSubscription } from '@apollo/client';
 import { SUBSCRIBE_HIKES } from '../graphql/subscriptions';
 import { useMapInstance } from '../hooks/useMapInstance';
 import { useMyPosition } from '../hooks/useMyPosition';
-import { addStartingMarkers } from '../utils/map/addStartingMarkers';
+import { addStartingMarkers } from '../utils/map';
 import { MapContainer } from '../style/Containers';
 import BackButtonHeader from '../components/BackButtonHeader';
 import { IHikeList } from '../types';

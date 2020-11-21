@@ -1,7 +1,4 @@
-export interface IHelperString {
-  sentence: string;
-  button: string;
-}
+import { IHelperString } from '../../types';
 
 export const helperStrings: IHelperString[] = [
   {

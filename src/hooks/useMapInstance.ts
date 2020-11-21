@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import mapboxgl, { MapboxOptions } from 'mapbox-gl';
 import { MAPBOX_ACCESS_TOKEN } from '../utils/constants/secrets';
-import { addControls } from '../utils/map/addControls';
+import { addControls } from '../utils/map';
 
 interface props {
   in: React.MutableRefObject<HTMLDivElement | null>;

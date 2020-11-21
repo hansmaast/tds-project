@@ -1,6 +1,8 @@
 import { LngLat } from 'mapbox-gl';
 
-export const getGeoJson = ({ from: coordinates }: { from: LngLat[] }) => ({
+export const getGeoJson = (
+  { from: coordinates }: { from: LngLat[] },
+) => ({
   type: 'geojson',
   data: {
     type: 'FeatureCollection',

@@ -6,10 +6,10 @@ import { arrowUndoCircleOutline } from 'ionicons/icons';
 import mapboxgl from 'mapbox-gl';
 import { MapContainer } from '../style/Containers';
 import { getIdbCoords, getPointString } from '../utils/helpers';
-import { helperStrings, IHelperString } from '../utils/map/helperStrings';
+import { helperStrings } from '../utils/map';
 import { useMapInstance } from '../hooks/useMapInstance';
 import { useMapMarkers } from '../hooks/useMapMarkers';
-import { IdbCoords, IHikeInsert } from '../types';
+import { IdbCoords, IHelperString, IHikeInsert } from '../types';
 
 interface MapModalProps {
   newHike: IHikeInsert;

@@ -40,3 +40,8 @@ export interface IUser {
   id: string;
   display_name: string;
 }
+
+export interface IHelperString {
+  sentence: string;
+  button: string;
+}
