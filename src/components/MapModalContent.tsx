@@ -3,13 +3,12 @@ import {
   IonButton, IonFabButton, IonIcon, IonLoading,
 } from '@ionic/react';
 import { arrowUndoCircleOutline } from 'ionicons/icons';
-import mapboxgl from 'mapbox-gl';
 import { MapContainer } from '../style/Containers';
-import { getIdbCoords, getPointString } from '../utils/helpers';
 import { helperStrings } from '../utils/map';
 import { useMapInstance } from '../hooks/useMapInstance';
 import { useMapMarkers } from '../hooks/useMapMarkers';
-import { IdbCoords, IHelperString, IHikeInsert } from '../types';
+import { IHelperString, IHikeInsert } from '../types';
+import { getIdbCoords } from '../utils/map/transformers';
 
 interface MapModalProps {
   newHike: IHikeInsert;
@@ -45,8 +44,6 @@ export const MapModalContent = ({
   }
 
   const handleButtonTap = () => {
-    // Todo: need to update the db to accept lots of coords
-    // Todo: create a boolean isDoneMarking (or something)
     if (coordinateArrayLength > 1) {
       setNewHike({
         ...newHike,

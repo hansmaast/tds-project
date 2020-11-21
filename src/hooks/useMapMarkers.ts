@@ -28,7 +28,6 @@ export const useMapMarkers = ({ on: mapInstance }: {on: mapboxgl.Map | undefined
 
   const handleSetMarker = (e: mapboxgl.MapMouseEvent & mapboxgl.EventData) => {
     console.log('👆', e.lngLat);
-    console.log(e.lngLat);
     setClickedCoord(e.lngLat);
   };
 
@@ -38,7 +37,6 @@ export const useMapMarkers = ({ on: mapInstance }: {on: mapboxgl.Map | undefined
     if (mapInstance && length > 0) {
       start.setLngLat(coordinates[0] as LngLatLike).addTo(mapInstance);
 
-      // Todo: put this in state? display and store in db
       const distanceInMeters = getTotalDistanceInMeters({ from: coordinates });
       setTotalDistanceInMeters(distanceInMeters);
       console.log('Meters: ', distanceInMeters);
@@ -46,7 +44,7 @@ export const useMapMarkers = ({ on: mapInstance }: {on: mapboxgl.Map | undefined
         end.setLngLat(coordinates[length - 1] as LngLatLike).addTo(mapInstance);
       }
 
-      drawLine(coordinates, mapInstance);
+      drawLine({ from: coordinates, on: mapInstance });
     }
   }, [coordinates, mapInstance]);
 

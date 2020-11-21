@@ -1,3 +1,6 @@
+import mapboxgl from 'mapbox-gl';
+import React from 'react';
+
 export interface IHike {
   id: number;
   title: string;
@@ -44,4 +47,15 @@ export interface IUser {
 export interface IHelperString {
   sentence: string;
   button: string;
+}
+
+export interface IHikeMarkers {
+  from: IHikeList;
+  to: mapboxgl.Map;
+  setDisplayInfo: React.Dispatch<React.SetStateAction<IDisplayInfo>>;
+}
+
+export interface IDisplayInfo {
+  display: boolean;
+  info: IHike | null
 }
