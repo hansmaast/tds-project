@@ -1,8 +1,15 @@
 import { useHistory } from 'react-router-dom';
 import React, { useState } from 'react';
-import { RoundedButton } from '../style/Buttons';
+import { RoundedButton } from '../style/buttonStyle';
 
-export const ButtonWithAnimation = ({ text, linkTo }: {text: string, linkTo: string}) => {
+interface props {
+  text: string;
+  // eslint-disable-next-line react/require-default-props
+  linkTo?: string;
+  // eslint-disable-next-line react/require-default-props
+  onClick?: () => void;
+}
+export const ButtonWithAnimation = ({ text, linkTo, onClick }: props) => {
   const history = useHistory();
   const [navigationDelay] = useState(80);
   const [scale, setScale] = useState(1);
@@ -13,10 +20,13 @@ export const ButtonWithAnimation = ({ text, linkTo }: {text: string, linkTo: str
   };
 
   const handleTapEnd = () => {
-    setTimeout(() => {
-      history.push(linkTo);
-    }, navigationDelay);
+    if (linkTo) {
+      setTimeout(() => {
+        history.push(linkTo);
+      }, navigationDelay);
+    }
     setTimeout(() => setScale(1), 50);
+    if (onClick) onClick();
   };
 
   return (

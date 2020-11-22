@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  IonButton, IonFabButton, IonIcon, IonLoading,
-} from '@ionic/react';
-import { arrowUndoCircleOutline } from 'ionicons/icons';
-import { MapContainer } from '../style/Containers';
+import { IonIcon, IonLoading } from '@ionic/react';
+import { arrowUndoCircleOutline, closeOutline } from 'ionicons/icons';
+import { MapContainer } from '../style/containerStyle';
 import { helperStrings } from '../utils/map';
 import { useMapInstance } from '../hooks/useMapInstance';
 import { useMapMarkers } from '../hooks/useMapMarkers';
 import { IHelperString, IHikeInsert } from '../types';
 import { getIdbCoords } from '../utils/map/transformers';
+import { ButtonWithAnimation } from './ButtonWithAnimation';
+import { margin_y_10_pt, ut_white } from '../style/constants';
+import { RoundArrowButton } from '../style/buttonStyle';
 
 interface MapModalProps {
   newHike: IHikeInsert;
@@ -68,11 +69,35 @@ export const MapModalContent = ({
         }}
       />
       <IonLoading showBackdrop={false} isOpen={mapTranslateX !== '0%'} />
-      <p style={{ margin: '1em auto 1em auto' }}>{ helperString.sentence }</p>
-      <IonFabButton onClick={undoLast}>
+      <RoundArrowButton
+        onClick={() => { setShowMapModal(false); }}
+        style={{
+          position: 'absolute', top: 20, left: 20, margin: margin_y_10_pt,
+        }}
+      >
+        <IonIcon icon={closeOutline} />
+      </RoundArrowButton>
+
+      <RoundArrowButton
+        onClick={undoLast}
+        style={{
+          position: 'absolute', bottom: 20, right: 20, margin: margin_y_10_pt,
+        }}
+      >
         <IonIcon icon={arrowUndoCircleOutline} />
-      </IonFabButton>
-      <IonButton onClick={handleButtonTap}>{ helperString.button }</IonButton>
+      </RoundArrowButton>
+      <div style={{
+        position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
+      }}
+      >
+        <p style={{
+          margin: '1em auto 1em auto', textAlign: 'center', backgroundColor: ut_white, padding: '5px 10px', borderRadius: 4,
+        }}
+        >
+          { helperString.sentence }
+        </p>
+        <ButtonWithAnimation onClick={handleButtonTap} text={helperString.button} />
+      </div>
     </>
   );
 };

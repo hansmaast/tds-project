@@ -10,7 +10,7 @@ import {
   IonToolbar,
 } from '@ionic/react';
 import React, { useEffect } from 'react';
-import { addOutline, logOutOutline, map } from 'ionicons/icons';
+import { addOutline, map } from 'ionicons/icons';
 import { useSubscription } from '@apollo/client';
 import { useAuth } from 'react-nhost';
 import { useHistory } from 'react-router';
@@ -20,7 +20,7 @@ import { APP_NAME } from '../utils/constants/strings';
 import { IHike, IHikeList } from '../types';
 import { useAuthentication } from '../hooks/useAuthetication';
 import { paths } from '../utils/constants/paths';
-import { Flex } from '../style/Containers';
+import { Flex } from '../style/containerStyle';
 
 export const Home = () => {
   const history = useHistory();
@@ -47,21 +47,22 @@ export const Home = () => {
             { APP_NAME }
           </IonTitle>
           <IonButtons slot="end">
-            { signedIn
-              ? (
-                <IonButton onClick={() => logout()}>
-                  <IonIcon icon={logOutOutline} size="medium" />
-                </IonButton>
-              ) : (
-                <IonButton onClick={() => history.push(paths.map)}>
-                  <IonIcon icon={map} size="medium" />
-                </IonButton>
-              )}
+            {/* Todo: Let the user logout */}
+            {/* { signedIn */}
+            {/*  ? ( */}
+            {/*    <IonButton onClick={() => logout()}> */}
+            {/*      <IonIcon icon={logOutOutline} size="medium" /> */}
+            {/*    </IonButton> */}
+            {/*  ) : ( */}
+            <IonButton onClick={() => history.push(paths.map)}>
+              <IonIcon icon={map} size="medium" />
+            </IonButton>
+            {/* )} */}
           </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <Flex column alignItems="center">
+        <Flex direction="column" alignItems="center">
           {
             loading && <IonProgressBar type="indeterminate" />
           }

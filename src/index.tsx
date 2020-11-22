@@ -7,11 +7,13 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { auth } from './utils/nhost';
 import { GRAPHQL_API } from './utils/constants/secrets';
+import { GlobalStyle } from './style/containerStyle';
 
 ReactDOM.render(
   <NhostAuthProvider auth={auth}>
     <NhostApolloProvider auth={auth} gqlEndpoint={GRAPHQL_API}>
       <IonReactRouter>
+        <GlobalStyle />
         <App />
       </IonReactRouter>
     </NhostApolloProvider>

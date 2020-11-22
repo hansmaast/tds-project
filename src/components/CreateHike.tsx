@@ -14,11 +14,12 @@ import { addOutline, cameraOutline } from 'ionicons/icons';
 import { usePhoto } from '../hooks/usePhoto';
 import placeHolderPhoto from '../assets/placeholder-image.png';
 import { useDbInsert } from '../hooks/useDbInsert';
-import { Button, RoundArrowButton } from '../style/Buttons';
-import { SubTitle } from '../style/Text';
-import { Flex } from '../style/Containers';
+import { RoundArrowButton } from '../style/buttonStyle';
+import { SubTitle } from '../style/textStyle';
 import { MapModalContent } from './MapModalContent';
 import { IHikeInsert } from '../types';
+import { ButtonWithAnimation } from './ButtonWithAnimation';
+import { ut_white } from '../style/constants';
 
 const initialState: IHikeInsert = {
   coordinates: { data: undefined },
@@ -42,63 +43,65 @@ export const CreateHike = () => {
   return (
     <>
       <IonProgressBar value={uploadProgress / 100} />
+      <div style={{
+        minHeight: 660, maxHeight: 1080, display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center', height: '100%', width: '100%',
+      }}
+      >
+        <div>
+          <IonItem lines="full" style={{ backgroundColor: ut_white, maxWidth: 500, width: '100vw' }}>
+            <IonLabel position="floating">Title</IonLabel>
+            <IonInput
+              type="text"
+              placeholder="Give your route a title.."
+              value={newHike?.title}
+              onIonChange={(e) => setNewHike({ ...newHike, title: e.detail.value! })}
+            />
+          </IonItem>
 
-      <Flex column justifyContent="space-between">
-        <IonItem lines="full">
-          <IonLabel position="floating">Title</IonLabel>
-          <IonInput
-            type="text"
-            placeholder="Give your route a title.."
-            value={newHike?.title}
-            onIonChange={(e) => setNewHike({ ...newHike, title: e.detail.value! })}
-          />
-        </IonItem>
+          <IonItem lines="full" style={{ maxWidth: 500, width: '100vw' }}>
+            <IonLabel position="floating">Description</IonLabel>
+            <IonTextarea
+              placeholder="Tell us something about the route.."
+              value={newHike.description}
+              onIonChange={(e) => setNewHike({ ...newHike, description: e.detail.value! })}
+            />
+          </IonItem>
+        </div>
 
-        <IonItem lines="full">
-          <IonLabel position="floating">Description</IonLabel>
-          <IonTextarea
-            placeholder="Tell us something about the route.."
-            value={newHike.description}
-            onIonChange={(e) => setNewHike({ ...newHike, description: e.detail.value! })}
-          />
-        </IonItem>
-
-        <IonCard>
+        <IonCard style={{ maxWidth: '500px' }}>
           <img src={photoSrc} alt="Camera" />
         </IonCard>
 
         <SubTitle>Press the camera icon to add a photo</SubTitle>
-        <Button onClick={() => setShowMapModal(true)} margin="12pt" width="50%" alignSelf="center">
-          Set starting
-          point
-        </Button>
-      </Flex>
+        <ButtonWithAnimation text="Mark your route" onClick={() => setShowMapModal(true)} />
 
-      <RoundArrowButton
-        disabled={!photo}
-        onClick={() => startPostUpload()}
-        style={{ position: 'absolute', bottom: 20, left: 20 }}
-      >
-        {/* isAuthenticating */ }
-        {/* ? <IonSpinner name="crescent" /> */ }
-        <IonIcon icon={addOutline} />
-      </RoundArrowButton>
+        <div style={{
+          maxWidth: 733, padding: 15, position: 'sticky', width: '100vw', display: 'flex', justifyContent: 'space-between', bottom: 0,
+        }}
+        >
+          <RoundArrowButton
+            disabled={!photo}
+            onClick={() => startPostUpload()}
+          >
+            {/* isAuthenticating */ }
+            {/* ? <IonSpinner name="crescent" /> */ }
+            <IonIcon icon={addOutline} />
+          </RoundArrowButton>
 
-      <RoundArrowButton
-        onClick={() => triggerCamera()}
-        style={{ position: 'absolute', bottom: 20, right: 20 }}
-      >
-        <IonIcon icon={cameraOutline} />
-      </RoundArrowButton>
-
-      <IonModal isOpen={showMapModal}>
-        <MapModalContent
-          setShowMapModal={setShowMapModal}
-          newHike={newHike}
-          setNewHike={setNewHike}
-        />
-      </IonModal>
-
+          <RoundArrowButton
+            onClick={() => triggerCamera()}
+          >
+            <IonIcon icon={cameraOutline} />
+          </RoundArrowButton>
+        </div>
+        <IonModal isOpen={showMapModal}>
+          <MapModalContent
+            setShowMapModal={setShowMapModal}
+            newHike={newHike}
+            setNewHike={setNewHike}
+          />
+        </IonModal>
+      </div>
       <IonToast
         isOpen={uploadSuccess}
         message="Your image has been saved."

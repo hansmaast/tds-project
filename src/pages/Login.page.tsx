@@ -13,15 +13,13 @@ import {
 import { useHistory } from 'react-router-dom';
 import { arrowForwardCircle } from 'ionicons/icons';
 import { auth } from '../utils/nhost';
-import { IonContentWithBackground } from '../style/IonContentWithBackground';
-import { Flex, Item } from '../style/Containers';
-import { LargeTitle, SubTitle } from '../style/Text';
-import { RoundArrowButton } from '../style/Buttons';
-import { Card } from '../style/Card';
 import { APP_NAME } from '../utils/constants/strings';
 import BackButtonHeader from '../components/BackButtonHeader';
 import { useAuthentication } from '../hooks/useAuthetication';
 import { paths } from '../utils/constants/paths';
+import { Item } from '../style/containerStyle';
+import { LargeTitle, SubTitle } from '../style/textStyle';
+import { RoundArrowButton } from '../style/buttonStyle';
 
 export const Login: React.FC = () => {
   const history = useHistory();
@@ -40,59 +38,60 @@ export const Login: React.FC = () => {
   return (
     <IonPage>
       <BackButtonHeader defaultHref="/" title="Login" />
-      <IonContentWithBackground>
-        <Flex fillParent column justifyContent="center">
-          <LargeTitle>{ APP_NAME }</LargeTitle>
-          <SubTitle>Please login to continue..</SubTitle>
-          <Card marginY="3em" paddingY="1em" paddingX="3em">
-            <IonList>
-              <Item lines="full">
-                <IonLabel>
-                  <span role="img" aria-label="mail">📬</span>
-                </IonLabel>
-                <IonInput
-                  value={email}
-                  type="email"
-                  placeholder="Email"
-                  onIonInput={(e: any) => setEmail(e.target.value)}
-                />
-              </Item>
-              <Item lines="full">
-                <IonLabel>
-                  <span role="img" aria-label="lock">🔓</span>
-                </IonLabel>
-                <IonInput
-                  value={password}
-                  type="password"
-                  placeholder="Password"
-                  onIonInput={(e: any) => setPassword(e.target.value)}
-                />
-              </Item>
-            </IonList>
-          </Card>
-          <RoundArrowButton onClick={() => authMethods.login({ email, password })}>
-            {
+      <div style={{
+        display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%', width: '100%',
+      }}
+      >
+        <LargeTitle>{ APP_NAME }</LargeTitle>
+        <SubTitle>Please login to continue..</SubTitle>
+
+        <IonList>
+          <Item lines="full">
+            <IonLabel>
+              <span role="img" aria-label="mail">📬</span>
+            </IonLabel>
+            <IonInput
+              value={email}
+              type="email"
+              placeholder="Email"
+              onIonInput={(e: any) => setEmail(e.target.value)}
+            />
+          </Item>
+          <Item lines="full">
+            <IonLabel>
+              <span role="img" aria-label="lock">🔓</span>
+            </IonLabel>
+            <IonInput
+              value={password}
+              type="password"
+              placeholder="Password"
+              onIonInput={(e: any) => setPassword(e.target.value)}
+            />
+          </Item>
+        </IonList>
+
+        <RoundArrowButton onClick={() => authMethods.login({ email, password })}>
+          {
                 isAuthenticating
                   ? <IonSpinner name="crescent" />
                   : <IonIcon icon={arrowForwardCircle} />
               }
-          </RoundArrowButton>
-          <SubTitle>Not signed up yet?</SubTitle>
-          <SubTitle>No problem. Just press the link below.</SubTitle>
-          <SubTitle>
-            <IonRouterLink onClick={() => history.replace(paths.signUp)}>
-              Sign up
-            </IonRouterLink>
-          </SubTitle>
-        </Flex>
-        <IonToast
-          isOpen={!!authError}
-          onDidDismiss={() => setAuthError('')}
-          message={authError}
-          duration={3000}
-          color="danger"
-        />
-      </IonContentWithBackground>
+        </RoundArrowButton>
+        <SubTitle>Not signed up yet?</SubTitle>
+        <SubTitle>No problem. Just press the link below.</SubTitle>
+        <SubTitle>
+          <IonRouterLink onClick={() => history.replace(paths.signUp)}>
+            Sign up
+          </IonRouterLink>
+        </SubTitle>
+      </div>
+      <IonToast
+        isOpen={!!authError}
+        onDidDismiss={() => setAuthError('')}
+        message={authError}
+        duration={3000}
+        color="danger"
+      />
     </IonPage>
   );
 };

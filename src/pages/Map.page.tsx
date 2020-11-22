@@ -3,7 +3,7 @@ import { IonContent, IonLoading, IonPage } from '@ionic/react';
 import { useSubscription } from '@apollo/client';
 import { IDisplayInfo, IHikeList } from '../types';
 import { SUBSCRIBE_HIKES } from '../graphql/subscriptions';
-import { MapContainer } from '../style/Containers';
+import { MapContainer } from '../style/containerStyle';
 import { useMapInstance } from '../hooks/useMapInstance';
 import { removeRouteLine } from '../utils/map/drawLine';
 import { addHikeMarkers } from '../utils/map';
@@ -36,6 +36,7 @@ export const MapPage = () => {
         <MapContainer ref={mapRef}>
           <MapDisplayInfo
             displayInfo={displayInfo}
+            setDisplayInfo={setDisplayInfo}
             onClick={() => {
               removeRouteLine({ from: map.instance! });
               setDisplayInfo({ display: false, info: null });

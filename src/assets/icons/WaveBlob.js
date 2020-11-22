@@ -1,4 +1,5 @@
 import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 const WaveBlob = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -9,4 +10,4 @@ const WaveBlob = () => (
   </svg>
 );
 
-export default WaveBlob;
+export const waveBlob = encodeURIComponent(renderToStaticMarkup(<WaveBlob />));

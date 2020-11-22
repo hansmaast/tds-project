@@ -15,14 +15,12 @@ import {
 import { useMutation, useQuery } from '@apollo/client';
 import { trashBinOutline } from 'ionicons/icons';
 import { useParams } from 'react-router';
-import CommentsContainer from '../components/CommentsContainer';
 import { IHike } from '../types';
 import { auth, storage } from '../utils/nhost';
 import { DELETE_POST } from '../graphql/mutations';
 import { PUBLIC_STORAGE_DIR } from '../utils/constants/urls';
 import { APP_NAME } from '../utils/constants/strings';
 import { GET_HIKE_BY_ID } from '../graphql/queries';
-import { Flex } from '../style/Containers';
 import { getPhotoUrl } from '../utils/helpers';
 
 export const HikeDetails = () => {
@@ -83,28 +81,41 @@ export const HikeDetails = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <Flex column alignItems="center">
+        <div style={{
+          display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', width: '100%',
+        }}
+        >
           <IonLoading isOpen={loading} />
 
           { hike && !loading
             && (
             <>
-              <img src={getPhotoUrl({ from: hike.publicPhotoPath })} />
+              <img
+                src={getPhotoUrl({ from: hike.publicPhotoPath })}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  maxWidth: 1100,
+                  maxHeight: 600,
+                  objectFit: 'cover',
+                }}
+              />
               {/* <HHCard hike={hike} /> */}
               <h3>{hike.title}</h3>
               <p>
-                Length:
-                {hike.length}
-              </p>
-              <div style={{ width: '100%', padding: 12 }}>
-                <p>{hike.description}</p>
-              </div>
 
-              <CommentsContainer postId={hike.id!} />
+                {
+                  `Length: 
+                 ${(hike.length / 1000).toFixed(3)} 
+                 km`
+                }
+
+              </p>
+              <p>{hike.description}</p>
             </>
             )}
 
-        </Flex>
+        </div>
       </IonContent>
     </IonPage>
   );

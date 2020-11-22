@@ -18,7 +18,7 @@ import '@ionic/react/css/display.css';
 import './style/theme/variables.css';
 
 const App: React.FC = () => (
-  <IonApp style={{ maxWidth: 1000, margin: '0 auto 0 auto' }}>
+  <IonApp>
     <Router />
   </IonApp>
 );

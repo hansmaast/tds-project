@@ -2,7 +2,7 @@ import { IHelperString } from '../../types';
 
 export const helperStrings: IHelperString[] = [
   {
-    sentence: 'Mark your route 🚶 📍‍️',
+    sentence: 'Mark your route📍‍️',
     button: 'Done',
   },
   {

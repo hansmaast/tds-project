@@ -1,13 +1,14 @@
 import mapboxgl, { LngLat, LngLatLike } from 'mapbox-gl';
 import { useEffect, useState } from 'react';
 import { drawLine, getTotalDistanceInMeters } from '../utils/map';
+import { ut_blue, ut_green } from '../style/constants';
 
 export const useMapMarkers = ({ on: mapInstance }: {on: mapboxgl.Map | undefined}) => {
   const [coordinates, setCoordinates] = useState<LngLat[]>([]);
   const [clickedCoord, setClickedCoord] = useState<LngLat>();
   const [totalDistanceInMeters, setTotalDistanceInMeters] = useState<number>(0);
-  const [start] = useState(new mapboxgl.Marker({ color: 'blue' }));
-  const [end] = useState(new mapboxgl.Marker({ color: 'green' }));
+  const [start] = useState(new mapboxgl.Marker({ color: ut_blue }));
+  const [end] = useState(new mapboxgl.Marker({ color: ut_green }));
 
   // adds controls and click listener to map
   useEffect(() => {
