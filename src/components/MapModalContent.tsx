@@ -36,7 +36,7 @@ export const MapModalContent = ({
     // animates map into view
     translateMap({ to: '0%', after: animationDuration * 6 });
   },
-  []); // eslint-disable react-hooks/exhaustive-deps
+  []); // eslint-disable-line
 
   function translateMap({ to: translateX, after: ms }: { to: string, after: number }) {
     setTimeout(() => {

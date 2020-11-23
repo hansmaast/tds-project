@@ -50,7 +50,7 @@ export const MapPage = () => {
         setDisplayInfo({ display: true, info: hike! });
       }
     }
-  }, [hikeData, id]);
+  }, [hikeData, id]);  // eslint-disable-line
 
   useEffect(() => {
     console.log(displayInfo);
@@ -60,7 +60,6 @@ export const MapPage = () => {
     <IonPage>
       <HeaderWithLogoutAndPlusSign />
       <IonContent fullscreen>
-
         <MapContainer ref={mapRef}>
           <MapDisplayInfo
             displayInfo={displayInfo}

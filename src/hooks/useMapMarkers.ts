@@ -47,13 +47,13 @@ export const useMapMarkers = ({ on: mapInstance }: {on: mapboxgl.Map | undefined
 
       drawLine({ from: coordinates, on: mapInstance });
     }
-  }, [coordinates, mapInstance]);
+  }, [coordinates, mapInstance]); // eslint-disable-line
 
   useEffect(() => {
     if (!mapInstance) return;
 
     setCoordinates([...coordinates, clickedCoord!]);
-  }, [clickedCoord]);
+  }, [clickedCoord]); // eslint-disable-line
 
   return {
     markers: {

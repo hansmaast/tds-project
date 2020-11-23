@@ -21,7 +21,7 @@ interface Props {
 const HikeCard: React.FC<Props> = ({ hike, onClick }) => {
   const history = useHistory();
   const {
-    id, user, title, description, publicPhotoPath, length: meters,
+    id, user, title, publicPhotoPath, length: meters,
   } = hike;
   const { display_name } = user;
   const km = (meters / 1000).toFixed(3);

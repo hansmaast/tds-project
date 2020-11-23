@@ -79,7 +79,7 @@ export const useDbInsert = ({ data, photo }: DbInsertProps) => {
         .then(() => history.replace(paths.home))
         .catch((e) => console.error(e));
     }
-  }, [uploadSuccess]);
+  }, [uploadSuccess]); // eslint-disable-line
 
   return { startPostUpload, uploadSuccess, uploadProgress };
 };

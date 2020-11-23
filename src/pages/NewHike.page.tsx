@@ -14,7 +14,6 @@ import {
   useIonViewWillEnter,
 } from '@ionic/react';
 import { addOutline, cameraOutline } from 'ionicons/icons';
-import { useHistory } from 'react-router';
 import { usePhoto } from '../hooks/usePhoto';
 import placeHolderPhoto from '../assets/placeholder-image.png';
 import { useDbInsert } from '../hooks/useDbInsert';
@@ -70,7 +69,7 @@ export const NewHike: React.FC = () => {
       <HeaderWithLogoutAndPlusSign />
       <IonContent>
         <IonProgressBar value={uploadProgress / 100} />
-        {/* // Todo: convert this to styled component */}
+        {/* // Todo: convert this to styled component */ }
         <div style={{
           minHeight: 660,
           maxHeight: 1080,
@@ -83,8 +82,8 @@ export const NewHike: React.FC = () => {
         }}
         >
           <div>
-            {' '}
-            {/* // Todo: refactor this to components */}
+            { ' ' }
+            {/* // Todo: refactor this to components */ }
             <IonItem lines="full" style={{ backgroundColor: ut_white, maxWidth: 500, width: '100vw' }}>
               <IonLabel position="floating">Title</IonLabel>
               <IonInput
@@ -111,7 +110,7 @@ export const NewHike: React.FC = () => {
 
           <SubTitle>Press the camera icon to add a photo</SubTitle>
           <ButtonWithAnimation text="Mark your route" onClick={() => setShowMapModal(true)} />
-          {/* // Todo: convert this to styled component */}
+          {/* // Todo: convert this to styled component */ }
           <div style={{
             maxWidth: 733,
             padding: 15,

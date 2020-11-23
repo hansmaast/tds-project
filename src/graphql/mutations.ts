@@ -13,21 +13,3 @@ export const INSERT_HIKE = gql`
             }
         }    
 `;
-
-// Todo: Change this..
-export const DELETE_POST = gql`
-    mutation DeletePost($id: Int!){
-        delete_comments (
-            where: {
-                post_id: {
-                    _eq: $id
-                }
-            }
-        ) {
-            affected_rows
-        }
-        delete_posts_by_pk (
-            id: $id
-        ) { id }
-    }
-`;

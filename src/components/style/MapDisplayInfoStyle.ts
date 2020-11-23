@@ -4,7 +4,7 @@ import { StyledFabButton } from './buttonStyle';
 import { ut_green } from './constants';
 
 export const DisplayInfoContainer = styled('div')`
-  margin: 25px 0;
+  margin: 35px 0;
   cursor: pointer;
   overflow: visible;
   width: fit-content;

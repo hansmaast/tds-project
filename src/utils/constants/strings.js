@@ -1,1 +1,1 @@
-export const APP_NAME = 'Hike Homie';
+export const APP_NAME = 'Hiky';

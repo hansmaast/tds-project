@@ -16,7 +16,7 @@ export const useMapInstance = ({ in: mapRef }: props) => {
       if (instance) instance.remove();
       console.log('Map removed!');
     },
-  []); // eslint-disable react-hooks/exhaustive-deps
+  []); // eslint-disable-line
 
   // sets map options
   useEffect(() => {
@@ -29,7 +29,7 @@ export const useMapInstance = ({ in: mapRef }: props) => {
         zoom: 10,
       });
     }
-  }, [mapRef]);
+  }, [mapRef]); // eslint-disable-line
 
   // initializes map
   useEffect(() => {
