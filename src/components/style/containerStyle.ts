@@ -1,9 +1,7 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import { IonContent, IonItem, IonModal } from '@ionic/react';
 import { motion } from 'framer-motion';
-import {
-  font, ut_gray_background, ut_green, ut_white,
-} from './constants';
+import { font, ut_gray_background, ut_white } from './constants';
 
 export const GlobalStyle = createGlobalStyle`
   html {
@@ -49,7 +47,7 @@ background-color: transparent;
 `;
 
 export const IonContentWithBackground = styled(IonContent)`
-background-image: url("../assets/background.jpg");
+background-image: url("../../assets/background.jpg");
 background-size: cover;
 height: 100%;
 width: 100%;

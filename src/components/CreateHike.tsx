@@ -1,26 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import {
-  IonCard,
-  IonIcon,
-  IonInput,
-  IonItem,
-  IonLabel,
-  IonModal,
-  IonProgressBar,
-  IonTextarea,
-  IonToast,
+  IonCard, IonIcon, IonInput, IonItem, IonLabel, IonProgressBar, IonTextarea, IonToast,
 } from '@ionic/react';
 import { addOutline, cameraOutline } from 'ionicons/icons';
-import styled from 'styled-components';
 import { usePhoto } from '../hooks/usePhoto';
 import placeHolderPhoto from '../assets/placeholder-image.png';
 import { useDbInsert } from '../hooks/useDbInsert';
-import { RoundArrowButton } from '../style/buttonStyle';
-import { SubTitle } from '../style/textStyle';
+import { StyledFabButton } from './style/buttonStyle';
+import { SubTitle } from './style/textStyle';
 import { MapModalContent } from './MapModalContent';
 import { IHikeInsert } from '../types';
 import { ButtonWithAnimation } from './ButtonWithAnimation';
-import { ut_white } from '../style/constants';
+import { ut_white } from './style/constants';
+import { FullScreenModal } from './style/containerStyle';
 
 const initialState: IHikeInsert = {
   coordinates: { data: undefined },
@@ -40,6 +32,17 @@ export const CreateHike = () => {
   useEffect(() => {
     console.log(JSON.stringify(newHike, null, 4));
   }, [newHike]);
+
+  function disablePost() {
+    if (
+      !newHike.coordinates
+        || !newHike.title
+        || !newHike.description
+        || !photo
+    ) return true;
+
+    return false;
+  }
 
   return (
     <>
@@ -80,20 +83,20 @@ export const CreateHike = () => {
           maxWidth: 733, padding: 15, position: 'sticky', width: '100vw', display: 'flex', justifyContent: 'space-between', bottom: 0,
         }}
         >
-          <RoundArrowButton
-            disabled={!photo}
+          <StyledFabButton
+            disabled={disablePost()}
             onClick={() => startPostUpload()}
           >
             {/* isAuthenticating */ }
             {/* ? <IonSpinner name="crescent" /> */ }
             <IonIcon icon={addOutline} />
-          </RoundArrowButton>
+          </StyledFabButton>
 
-          <RoundArrowButton
+          <StyledFabButton
             onClick={() => triggerCamera()}
           >
             <IonIcon icon={cameraOutline} />
-          </RoundArrowButton>
+          </StyledFabButton>
         </div>
         <FullScreenModal isOpen={showMapModal}>
           <MapModalContent
@@ -110,9 +113,3 @@ export const CreateHike = () => {
     </>
   );
 };
-
-const FullScreenModal = styled(IonModal)`
---width: 100%;
---height: 100%;
---border-radius: 0;
-`;

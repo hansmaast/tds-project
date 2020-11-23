@@ -1,7 +1,7 @@
 import mapboxgl, { LngLat, LngLatLike } from 'mapbox-gl';
 import { useEffect, useState } from 'react';
 import { drawLine, getTotalDistanceInMeters } from '../utils/map';
-import { ut_blue, ut_green } from '../style/constants';
+import { ut_blue, ut_green } from '../components/style/constants';
 
 export const useMapMarkers = ({ on: mapInstance }: {on: mapboxgl.Map | undefined}) => {
   const [coordinates, setCoordinates] = useState<LngLat[]>([]);

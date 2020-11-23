@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { IonIcon, IonLoading } from '@ionic/react';
 import { arrowUndoCircleOutline, closeOutline } from 'ionicons/icons';
-import { MapContainer } from '../style/containerStyle';
+import { MapContainer } from './style/containerStyle';
 import { helperStrings } from '../utils/map';
 import { useMapInstance } from '../hooks/useMapInstance';
 import { useMapMarkers } from '../hooks/useMapMarkers';
 import { IHelperString, IHikeInsert } from '../types';
 import { getIdbCoords } from '../utils/map/transformers';
 import { ButtonWithAnimation } from './ButtonWithAnimation';
-import { margin_y_10_pt, ut_white } from '../style/constants';
-import { RoundArrowButton } from '../style/buttonStyle';
+import { margin_y_10_pt, ut_white } from './style/constants';
+import { StyledFabButton } from './style/buttonStyle';
 
 interface MapModalProps {
   newHike: IHikeInsert;
@@ -69,23 +69,23 @@ export const MapModalContent = ({
         }}
       />
       <IonLoading showBackdrop={false} isOpen={mapTranslateX !== '0%'} />
-      <RoundArrowButton
+      <StyledFabButton
         onClick={() => { setShowMapModal(false); }}
         style={{
           position: 'absolute', top: 20, left: 20, margin: margin_y_10_pt,
         }}
       >
         <IonIcon icon={closeOutline} />
-      </RoundArrowButton>
+      </StyledFabButton>
 
-      <RoundArrowButton
+      <StyledFabButton
         onClick={undoLast}
         style={{
           position: 'absolute', bottom: 20, right: 20, margin: margin_y_10_pt,
         }}
       >
         <IonIcon icon={arrowUndoCircleOutline} />
-      </RoundArrowButton>
+      </StyledFabButton>
       <div style={{
         position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
       }}

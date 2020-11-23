@@ -6,7 +6,7 @@ import { getFilenameForPhoto } from '../utils/helpers';
 import { auth, storage } from '../utils/nhost';
 import { INSERT_HIKE } from '../graphql/mutations';
 import { PUBLIC_STORAGE_DIR } from '../utils/constants/urls';
-import { paths } from '../utils/constants/paths';
+import { paths } from '../navigation/paths';
 import { IHikeInsert } from '../types';
 
 interface DbInsertProps {

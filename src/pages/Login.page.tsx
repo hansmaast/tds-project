@@ -14,12 +14,11 @@ import { useHistory } from 'react-router-dom';
 import { arrowForwardCircle } from 'ionicons/icons';
 import { auth } from '../utils/nhost';
 import { APP_NAME } from '../utils/constants/strings';
-import BackButtonHeader from '../components/BackButtonHeader';
 import { useAuthentication } from '../hooks/useAuthetication';
-import { paths } from '../utils/constants/paths';
-import { Item } from '../style/containerStyle';
-import { LargeTitle, SubTitle } from '../style/textStyle';
-import { RoundArrowButton } from '../style/buttonStyle';
+import { paths } from '../navigation/paths';
+import { Item } from '../components/style/containerStyle';
+import { LargeTitle, SubTitle } from '../components/style/textStyle';
+import { StyledFabButton } from '../components/style/buttonStyle';
 
 export const Login: React.FC = () => {
   const history = useHistory();
@@ -37,7 +36,6 @@ export const Login: React.FC = () => {
 
   return (
     <IonPage>
-      <BackButtonHeader defaultHref="/" title="Login" />
       <div style={{
         display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%', width: '100%',
       }}
@@ -70,13 +68,13 @@ export const Login: React.FC = () => {
           </Item>
         </IonList>
 
-        <RoundArrowButton onClick={() => authMethods.login({ email, password })}>
+        <StyledFabButton onClick={() => authMethods.login({ email, password })}>
           {
                 isAuthenticating
                   ? <IonSpinner name="crescent" />
                   : <IonIcon icon={arrowForwardCircle} />
               }
-        </RoundArrowButton>
+        </StyledFabButton>
         <SubTitle>Not signed up yet?</SubTitle>
         <SubTitle>No problem. Just press the link below.</SubTitle>
         <SubTitle>

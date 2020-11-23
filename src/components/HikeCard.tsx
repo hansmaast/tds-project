@@ -6,19 +6,19 @@ import { useHistory } from 'react-router-dom';
 import { mapOutline } from 'ionicons/icons';
 import styled from 'styled-components';
 import { IHike } from '../types';
-import { Card, CardImage } from '../style/cards';
+import { Card, CardImage } from './style/cards';
 import { getPhotoUrl } from '../utils/helpers';
-import { Flex } from '../style/containerStyle';
+import { Flex } from './style/containerStyle';
 import {
   ut_black, ut_box_shadow, ut_green, ut_white,
-} from '../style/constants';
+} from './style/constants';
 
 interface Props {
   hike: IHike
   onClick?: () => void
 }
 
-const HHCard: React.FC<Props> = ({ hike, onClick }) => {
+const HikeCard: React.FC<Props> = ({ hike, onClick }) => {
   const history = useHistory();
   const {
     id, user, title, description, publicPhotoPath, length: meters,
@@ -84,4 +84,4 @@ const StyledIcon = styled(IonIcon)`
   }
 `;
 
-export default HHCard;
+export default HikeCard;

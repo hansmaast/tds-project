@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { IonCard } from '@ionic/react';
-import { StyledFabButton } from '../../style/buttonStyle';
-import { ut_green } from '../../style/constants';
+import { StyledFabButton } from './buttonStyle';
+import { ut_green } from './constants';
 
 export const DisplayInfoContainer = styled('div')`
   margin: 25px 0;

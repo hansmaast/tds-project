@@ -1,12 +1,10 @@
-import {
-  IonCardSubtitle, IonCardTitle, IonIcon, IonText,
-} from '@ionic/react';
+import { IonCardSubtitle, IonCardTitle, IonIcon } from '@ionic/react';
 import { closeOutline } from 'ionicons/icons';
 import React from 'react';
 import { useHistory } from 'react-router';
-import { getPhotoUrl } from '../../utils/helpers';
-import { Flex } from '../../style/containerStyle';
-import { IDisplayInfo } from '../../types';
+import { getPhotoUrl } from '../utils/helpers';
+import { Flex } from './style/containerStyle';
+import { IDisplayInfo } from '../types';
 import {
   DisplayInfoContainer,
   MapInfoCard,
@@ -14,7 +12,7 @@ import {
   MapInfoCardImageContainer,
   MapInfoCardTextContainer,
   SmallCloseButton,
-} from './style';
+} from './style/MapDisplayInfoStyle';
 
 interface Props {
   displayInfo: IDisplayInfo;

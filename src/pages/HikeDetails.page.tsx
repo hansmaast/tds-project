@@ -1,29 +1,17 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useEffect, useState } from 'react';
-import {
-  IonBackButton,
-  IonButton,
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonLoading,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from '@ionic/react';
+import { IonContent, IonLoading, IonPage } from '@ionic/react';
 import { useMutation, useQuery } from '@apollo/client';
-import { trashBinOutline } from 'ionicons/icons';
 import { useParams } from 'react-router';
 import { IHike } from '../types';
 import { auth, storage } from '../utils/nhost';
 import { DELETE_POST } from '../graphql/mutations';
 import { PUBLIC_STORAGE_DIR } from '../utils/constants/urls';
-import { APP_NAME } from '../utils/constants/strings';
 import { GET_HIKE_BY_ID } from '../graphql/queries';
 import { getPhotoUrl } from '../utils/helpers';
 import { ButtonWithAnimation } from '../components/ButtonWithAnimation';
-import { Flex } from '../style/containerStyle';
+import { HeaderWithLogoutAndPlusSign } from '../components/HeaderWithLogoutAndPlusSign';
+import { Flex } from '../components/style/containerStyle';
 
 export const HikeDetails = () => {
   const { id } = useParams();
@@ -64,29 +52,9 @@ export const HikeDetails = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton defaultHref="/home" />
-          </IonButtons>
-          <IonTitle>{ APP_NAME }</IonTitle>
-          { auth.isAuthenticated()
-              && (
-                auth.getClaim('x-hasura-user-id') === hike?.user.id
-                  && (
-                  <IonButtons slot="end">
-                    <IonButton onClick={() => deletePost(hike?.id!)}>
-                      <IonIcon color="danger" icon={trashBinOutline} />
-                    </IonButton>
-                  </IonButtons>
-                  )) }
-        </IonToolbar>
-      </IonHeader>
+      <HeaderWithLogoutAndPlusSign />
       <IonContent fullscreen>
-        <div style={{
-          display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', width: '100%', marginBottom: 20,
-        }}
-        >
+        <Flex noWrap fillParent direction="column" alignItems="center">
           <IonLoading isOpen={loading} />
 
           { hike && !loading
@@ -97,7 +65,7 @@ export const HikeDetails = () => {
                 alt="hike"
                 style={{
                   width: '100%',
-                  height: '100%',
+                  height: '50%',
                   maxWidth: 1100,
                   maxHeight: 600,
                   objectFit: 'cover',
@@ -118,7 +86,7 @@ export const HikeDetails = () => {
               <ButtonWithAnimation text="View in map" linkTo={`/map/${hike!.id}`} />
             </>
             )}
-        </div>
+        </Flex>
       </IonContent>
     </IonPage>
   );

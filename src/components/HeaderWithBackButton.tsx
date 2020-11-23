@@ -8,7 +8,7 @@ interface BackButtonHeaderProps {
   title: string;
 }
 
-const BackButtonHeader: React.FC<BackButtonHeaderProps> = ({ title, defaultHref }) => (
+const HeaderWithBackButton: React.FC<BackButtonHeaderProps> = ({ title, defaultHref }) => (
   <IonHeader>
     <IonToolbar>
       <IonButtons slot="start">
@@ -21,4 +21,4 @@ const BackButtonHeader: React.FC<BackButtonHeaderProps> = ({ title, defaultHref 
   </IonHeader>
 );
 
-export default BackButtonHeader;
+export default HeaderWithBackButton;

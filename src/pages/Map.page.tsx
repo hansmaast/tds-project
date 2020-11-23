@@ -1,16 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { IonContent, IonLoading, IonPage } from '@ionic/react';
+import {
+  IonContent, IonLoading, IonPage, useIonViewWillEnter,
+} from '@ionic/react';
 import { useSubscription } from '@apollo/client';
-import { useParams } from 'react-router';
 import { IDisplayInfo, IHikeList } from '../types';
 import { SUBSCRIBE_HIKES } from '../graphql/subscriptions';
-import { MapContainer } from '../style/containerStyle';
+import { MapContainer } from '../components/style/containerStyle';
 import { useMapInstance } from '../hooks/useMapInstance';
 import { drawRouteLine, removeRouteLine } from '../utils/map/drawLine';
 import { addHikeMarkers, getBounds } from '../utils/map';
 import { MapDisplayInfo } from '../components/MapDisplayInfo';
-import BackButtonHeader from '../components/BackButtonHeader';
 import { getLngLatCoords } from '../utils/map/transformers';
+import { HeaderWithLogoutAndPlusSign } from '../components/HeaderWithLogoutAndPlusSign';
 
 export const MapPage = () => {
   const mapRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
@@ -20,7 +21,20 @@ export const MapPage = () => {
     fetchPolicy: 'no-cache',
   });
 
-  const { id } = useParams();
+  const [id, setId] = useState<number>();
+
+  useIonViewWillEnter(() => {
+    // when navigating with tabs, the usePrams hook does not register a change in the url
+    const idParam = window.location.pathname.split('/')[2];
+    const idInt = parseInt(idParam);
+    if (idInt) setId(idInt);
+    console.log(window.location.pathname.split('/')[2]);
+
+    // fore map to fit view
+    if (map.instance) {
+      map.instance.resize();
+    }
+  }, [map]);
 
   useEffect(() => {
     if (map.instance && hikeData) {
@@ -28,8 +42,7 @@ export const MapPage = () => {
 
       // zooms in on route if map renders with an id
       if (id) {
-        if (id === 'all-routes') return;
-        const hike = hikeData.hikes.find((h) => h.id === parseInt(id));
+        const hike = hikeData.hikes.find((h) => h.id === id);
         const lngLat = getLngLatCoords({ from: hike!.coordinates });
         const bounds = getBounds({ from: lngLat });
         map.instance.fitBounds(bounds);
@@ -37,7 +50,7 @@ export const MapPage = () => {
         setDisplayInfo({ display: true, info: hike! });
       }
     }
-  }, [hikeData]);
+  }, [hikeData, id]);
 
   useEffect(() => {
     console.log(displayInfo);
@@ -45,7 +58,7 @@ export const MapPage = () => {
 
   return (
     <IonPage>
-      <BackButtonHeader defaultHref="/home" title="Hike Map" />
+      <HeaderWithLogoutAndPlusSign />
       <IonContent fullscreen>
 
         <MapContainer ref={mapRef}>

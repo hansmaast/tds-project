@@ -13,13 +13,12 @@ import {
 import { useHistory } from 'react-router-dom';
 import { arrowForwardCircle } from 'ionicons/icons';
 import { auth } from '../utils/nhost';
-import { Item } from '../style/containerStyle';
-import { LargeTitle, SubTitle } from '../style/textStyle';
-import { RoundArrowButton } from '../style/buttonStyle';
+import { Item } from '../components/style/containerStyle';
+import { LargeTitle, SubTitle } from '../components/style/textStyle';
+import { StyledFabButton } from '../components/style/buttonStyle';
 import { APP_NAME } from '../utils/constants/strings';
-import BackButtonHeader from '../components/BackButtonHeader';
 import { useAuthentication } from '../hooks/useAuthetication';
-import { paths } from '../utils/constants/paths';
+import { paths } from '../navigation/paths';
 
 export const SignUp: React.FC = () => {
   const history = useHistory();
@@ -33,11 +32,15 @@ export const SignUp: React.FC = () => {
     if (auth.isAuthenticated()) {
       history.replace(paths.home);
     }
-  });
+  }, []);
+
+  function handleSignUp() {
+    authMethods.register({ email, password })
+      .then(() => authMethods.login({ email, password }));
+  }
 
   return (
     <IonPage>
-      <BackButtonHeader defaultHref="/" title="Sign up" />
       <div style={{
         display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%', width: '100%',
       }}
@@ -68,13 +71,13 @@ export const SignUp: React.FC = () => {
             />
           </Item>
         </IonList>
-        <RoundArrowButton onClick={() => authMethods.register({ email, password })}>
+        <StyledFabButton onClick={() => handleSignUp()}>
           {
                 isAuthenticating
                   ? <IonSpinner name="crescent" />
                   : <IonIcon icon={arrowForwardCircle} />
               }
-        </RoundArrowButton>
+        </StyledFabButton>
         <SubTitle>Already signed up?</SubTitle>
         <SubTitle>No problem. Just press the link below.</SubTitle>
         <SubTitle>
