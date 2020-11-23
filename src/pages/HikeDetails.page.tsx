@@ -94,6 +94,7 @@ export const HikeDetails = () => {
             <>
               <img
                 src={getPhotoUrl({ from: hike.publicPhotoPath })}
+                alt="hike"
                 style={{
                   width: '100%',
                   height: '100%',

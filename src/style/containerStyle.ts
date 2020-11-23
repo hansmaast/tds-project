@@ -29,13 +29,13 @@ type FlexProps = {
   fillParent?: boolean,
 };
 export const Flex = styled('div')<FlexProps>`
---display: flex;
---flex-direction: ${(props) => props.direction};;
+display: flex;
+flex-direction: ${(props) => props.direction};;
 justify-content: ${(props) => props.justifyContent};
 align-items: ${(props) => props.alignItems};
---width: ${(props) => (props.fillParent ? '100%' : '')};
---height: ${(props) => (props.fillParent ? '100%' : '')};
---background-color: transparent;
+width: ${(props) => (props.fillParent ? '100%' : '')};
+height: ${(props) => (props.fillParent ? '100%' : '')};
+background-color: transparent;
 
 @media(min-width:  722px) {
  flex-flow: row wrap;
