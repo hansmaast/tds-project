@@ -1,7 +1,9 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import { IonContent, IonItem, IonModal } from '@ionic/react';
 import { motion } from 'framer-motion';
-import { font, ut_gray_background, ut_white } from './constants';
+import {
+  font, ut_gray_background, ut_green, ut_white,
+} from './constants';
 
 export const GlobalStyle = createGlobalStyle`
   html {
@@ -11,11 +13,13 @@ export const GlobalStyle = createGlobalStyle`
   }
   body {
     max-width: 1400px;
+    
     --ion-background-color: ${ut_gray_background};
     --ion-card-background: ${ut_white};
     --ion-font-family: ${font.name}, ${font.family};
   }
   * {
+  --ion-color-primary: ${ut_green};
   box-sizing: border-box;
   font-family: ${font.name}, ${font.family};
   }
