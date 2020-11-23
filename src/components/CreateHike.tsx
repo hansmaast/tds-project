@@ -11,6 +11,7 @@ import {
   IonToast,
 } from '@ionic/react';
 import { addOutline, cameraOutline } from 'ionicons/icons';
+import styled from 'styled-components';
 import { usePhoto } from '../hooks/usePhoto';
 import placeHolderPhoto from '../assets/placeholder-image.png';
 import { useDbInsert } from '../hooks/useDbInsert';
@@ -94,13 +95,13 @@ export const CreateHike = () => {
             <IonIcon icon={cameraOutline} />
           </RoundArrowButton>
         </div>
-        <IonModal isOpen={showMapModal}>
+        <FullScreenModal isOpen={showMapModal}>
           <MapModalContent
             setShowMapModal={setShowMapModal}
             newHike={newHike}
             setNewHike={setNewHike}
           />
-        </IonModal>
+        </FullScreenModal>
       </div>
       <IonToast
         isOpen={uploadSuccess}
@@ -109,3 +110,9 @@ export const CreateHike = () => {
     </>
   );
 };
+
+const FullScreenModal = styled(IonModal)`
+--width: 100%;
+--height: 100%;
+--border-radius: 0;
+`;

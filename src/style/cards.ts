@@ -13,10 +13,10 @@ export const Card = styled(IonCard)<CardProps>`
 border-radius: 0;
 max-width: 540px;
 max-height: 540px;
-min-width: 240px;
-min-height: 240px;
+min-width: 340px;
+min-height: 340px;
 width: 100vw;
-height: 100vw;
+height: 80vw;
 flex: 1 1; // grow, shrink, basis
 --box-shadow: ${ut_box_shadow};
 align-self: ${(props) => props.alignSelf};

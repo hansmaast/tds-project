@@ -22,6 +22,8 @@ import { PUBLIC_STORAGE_DIR } from '../utils/constants/urls';
 import { APP_NAME } from '../utils/constants/strings';
 import { GET_HIKE_BY_ID } from '../graphql/queries';
 import { getPhotoUrl } from '../utils/helpers';
+import { ButtonWithAnimation } from '../components/ButtonWithAnimation';
+import { Flex } from '../style/containerStyle';
 
 export const HikeDetails = () => {
   const { id } = useParams();
@@ -82,7 +84,7 @@ export const HikeDetails = () => {
       </IonHeader>
       <IonContent fullscreen>
         <div style={{
-          display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', width: '100%',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', width: '100%', marginBottom: 20,
         }}
         >
           <IonLoading isOpen={loading} />
@@ -112,9 +114,9 @@ export const HikeDetails = () => {
 
               </p>
               <p>{hike.description}</p>
+              <ButtonWithAnimation text="View in map" linkTo={`/map/${hike!.id}`} />
             </>
             )}
-
         </div>
       </IonContent>
     </IonPage>

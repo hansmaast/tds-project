@@ -54,7 +54,7 @@ export const Home = () => {
             {/*      <IonIcon icon={logOutOutline} size="medium" /> */}
             {/*    </IonButton> */}
             {/*  ) : ( */}
-            <IonButton onClick={() => history.push(paths.map)}>
+            <IonButton onClick={() => history.push('/map/all-routes')}>
               <IonIcon icon={map} size="medium" />
             </IonButton>
             {/* )} */}

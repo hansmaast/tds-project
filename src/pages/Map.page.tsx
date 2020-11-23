@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { IonContent, IonLoading, IonPage } from '@ionic/react';
 import { useSubscription } from '@apollo/client';
+import { useParams } from 'react-router';
 import { IDisplayInfo, IHikeList } from '../types';
 import { SUBSCRIBE_HIKES } from '../graphql/subscriptions';
 import { MapContainer } from '../style/containerStyle';
 import { useMapInstance } from '../hooks/useMapInstance';
-import { removeRouteLine } from '../utils/map/drawLine';
-import { addHikeMarkers } from '../utils/map';
+import { drawRouteLine, removeRouteLine } from '../utils/map/drawLine';
+import { addHikeMarkers, getBounds } from '../utils/map';
 import { MapDisplayInfo } from '../components/MapDisplayInfo';
 import BackButtonHeader from '../components/BackButtonHeader';
+import { getLngLatCoords } from '../utils/map/transformers';
 
 export const MapPage = () => {
   const mapRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
@@ -18,9 +20,22 @@ export const MapPage = () => {
     fetchPolicy: 'no-cache',
   });
 
+  const { id } = useParams();
+
   useEffect(() => {
     if (map.instance && hikeData) {
       addHikeMarkers({ from: hikeData, to: map.instance!, setDisplayInfo });
+
+      // zooms in on route if map renders with an id
+      if (id) {
+        if (id === 'all-routes') return;
+        const hike = hikeData.hikes.find((h) => h.id === parseInt(id));
+        const lngLat = getLngLatCoords({ from: hike!.coordinates });
+        const bounds = getBounds({ from: lngLat });
+        map.instance.fitBounds(bounds);
+        drawRouteLine({ from: hike!, on: map.instance });
+        setDisplayInfo({ display: true, info: hike! });
+      }
     }
   }, [hikeData]);
 

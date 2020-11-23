@@ -4,6 +4,6 @@ export const paths = {
   newHike: '/new-hike',
   home: '/home',
   details: '/details/:id',
-  map: '/map',
+  map: '/map/:id',
   landing: '/',
 };
