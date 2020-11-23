@@ -14,7 +14,7 @@ border-radius: 0;
 max-width: 540px;
 max-height: 540px;
 min-width: 340px;
-min-height: 340px;
+min-height: 375px;
 width: 100vw;
 height: 80vw;
 flex: 1 1; // grow, shrink, basis
@@ -36,5 +36,4 @@ export const CardImage = styled('img')`
   width: 100%;
   height: 66%;
   object-fit: cover;
-
 `;

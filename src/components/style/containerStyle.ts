@@ -1,7 +1,9 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { IonContent, IonItem } from '@ionic/react';
+import { IonContent, IonItem, IonModal } from '@ionic/react';
 import { motion } from 'framer-motion';
-import { font, ut_gray_background, ut_white } from './constants';
+import {
+  font, ut_gray_background, ut_green, ut_white,
+} from './constants';
 
 export const GlobalStyle = createGlobalStyle`
   html {
@@ -27,6 +29,7 @@ type FlexProps = {
   justifyContent?: string,
   alignItems?: string,
   fillParent?: boolean,
+  noWrap?: boolean
 };
 export const Flex = styled('div')<FlexProps>`
 display: flex;
@@ -37,26 +40,21 @@ width: ${(props) => (props.fillParent ? '100%' : '')};
 height: ${(props) => (props.fillParent ? '100%' : '')};
 background-color: transparent;
 
+
 @media(min-width:  722px) {
- flex-flow: row wrap;
- justify-content: space-between;
+ 
+ flex-flow: ${(props) => (props.noWrap ? props.direction : 'row wrap')};
+ justify-content: ${(props) => (props.noWrap ? props.justifyContent : 'space-between')};
 }
 `;
 
-export const FlexColumnCenter = styled.div`
-display: flex; 
-flexDirection: column;
-justify-content: center; 
-align-items: center; 
-height: 100%; 
-width: 100%;
-`;
-
 export const IonContentWithBackground = styled(IonContent)`
-background-image: url("../assets/dino-reichmuth-pl1mhwMctJc-unsplash.jpg");
+background-image: url("../assets/background.jpg");
 background-size: cover;
 height: 100%;
+width: 100%;
 background-size: cover;
+--ion-background-color: transparent;
 `;
 
 export const MapContainer = styled(motion.div)`
@@ -67,4 +65,10 @@ height: 100%;
 export const Item = styled(IonItem)`
  border-radius: 7px;
  margin: 1em 0;
+`;
+
+export const FullScreenModal = styled(IonModal)`
+--width: 100%;
+--height: 100%;
+--border-radius: 0;
 `;

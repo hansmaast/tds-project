@@ -56,7 +56,7 @@ transition: box-shadow 0.3s;
 }
 `;
 
-export const RoundArrowButton = styled(IonFabButton)`
+export const StyledFabButton = styled(IonFabButton)`
 --background: ${ut_black};
 align-self: center;
 `;
