@@ -26,3 +26,5 @@ Hopefully I will test it on Android in the near future.
 * 'Login' always redirects to home.
 
 * No offline storage implemented.
+
+* 'Home' not updating with newest content.
