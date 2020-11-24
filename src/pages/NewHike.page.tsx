@@ -28,6 +28,7 @@ import { auth } from '../utils/nhost';
 import { HeaderWithLogoutAndPlusSign } from '../components/HeaderWithLogoutAndPlusSign';
 import { YouNeedToLogin } from '../components/YouNeedToLogin';
 
+// Todo: This could be a class as well..
 const initialState: IHikeInsert = {
   coordinates: { data: undefined },
   description: '',

@@ -17,13 +17,5 @@ export const SUBSCRIBE_HIKES = gql`
                 id
                 display_name
             }
-            comments {
-                id
-                text
-                post_id
-                user {
-                    display_name
-                }
-            }
         }
     }`;
