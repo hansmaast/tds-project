@@ -1,6 +1,10 @@
 import mapboxgl, { LngLat } from 'mapbox-gl';
 import { IdbCoords } from '../../types';
 
+/**
+ * Transforms mapbox type LngLat to postgres type Point (IdbCoords) <-->
+ */
+
 export const getLngLatCoords = (
   { from: coordinates }: { from: IdbCoords[] },
 ): LngLat[] => coordinates.map((coor) => getLngLat({ from: coor.lng_lat }));

@@ -3,16 +3,12 @@ import { closeOutline } from 'ionicons/icons';
 import React from 'react';
 import { useHistory } from 'react-router';
 import { getPhotoUrl } from '../utils/helpers';
-import { Flex } from './style/containerStyle';
-import { IDisplayInfo } from '../types';
 import {
-  DisplayInfoContainer,
-  MapInfoCard,
-  MapInfoCardImage,
-  MapInfoCardImageContainer,
-  MapInfoCardTextContainer,
-  SmallCloseButton,
-} from './style/MapDisplayInfoStyle';
+  DisplayInfoContainer, Flex, MapInfoCardImageContainer, MapInfoCardTextContainer,
+} from './style/containers';
+import { IDisplayInfo } from '../types';
+import { SmallCloseButton } from './style/buttons';
+import { MapInfoCard, MapInfoCardImage } from './style/cards';
 
 interface Props {
   displayInfo: IDisplayInfo;
@@ -26,6 +22,7 @@ export const MapDisplayInfo = (
   const { display, info } = displayInfo;
   const history = useHistory();
   if (!display) return null;
+  const km = (info!.length / 1000).toFixed(3);
   return (
     <DisplayInfoContainer>
       <SmallCloseButton
@@ -37,26 +34,16 @@ export const MapDisplayInfo = (
         <IonIcon icon={closeOutline} />
       </SmallCloseButton>
 
-      <MapInfoCard
-        onClick={() => {
-          history.replace(`/details/${info!.id}`);
-        }}
-      >
+      <MapInfoCard onClick={() => history.replace(`/details/${info!.id}`)}>
         <Flex direction="row" alignItems="center">
           <MapInfoCardTextContainer>
             <IonCardTitle>{ displayInfo.info?.title }</IonCardTitle>
             <IonCardSubtitle>
-              Length:
-              { ' ' }
-              { (info!.length / 1000).toFixed(3) }
-              { ' ' }
-              km
+              {`Length: ${km} km`}
             </IonCardSubtitle>
           </MapInfoCardTextContainer>
           <MapInfoCardImageContainer>
-            <MapInfoCardImage
-              src={getPhotoUrl({ from: info!.publicPhotoPath })}
-            />
+            <MapInfoCardImage src={getPhotoUrl({ from: info!.publicPhotoPath })} />
           </MapInfoCardImageContainer>
         </Flex>
       </MapInfoCard>

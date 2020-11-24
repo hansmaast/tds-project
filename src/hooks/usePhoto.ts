@@ -1,6 +1,9 @@
 import { useCamera } from '@capacitor-community/react-hooks/camera';
 import { CameraResultType } from '@capacitor/core';
 
+/**
+ * Enables native camera use.
+ */
 export function usePhoto() {
   const { photo, getPhoto } = useCamera();
   const triggerCamera = async () => {

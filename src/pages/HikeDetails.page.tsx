@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-use-before-define
 import React, { useEffect, useState } from 'react';
 import { IonContent, IonLoading, IonPage } from '@ionic/react';
 import { useQuery } from '@apollo/client';
@@ -8,19 +7,12 @@ import { GET_HIKE_BY_ID } from '../graphql/queries';
 import { getPhotoUrl } from '../utils/helpers';
 import { ButtonWithAnimation } from '../components/ButtonWithAnimation';
 import { HeaderWithLogoutAndPlusSign } from '../components/HeaderWithLogoutAndPlusSign';
-import { Flex } from '../components/style/containerStyle';
+import { Flex } from '../components/style/containers';
 
 export const HikeDetails = () => {
   const { id } = useParams();
   const [hike, setHike] = useState<IHike>();
-  const { loading, data, error } = useQuery(GET_HIKE_BY_ID, { variables: { id } });
-
-  useEffect(() => {
-    console.log(typeof id, id);
-    console.log('Loading: ', loading);
-    console.log('Data: ', JSON.stringify(data, null, 4));
-    console.log('Error: ', error);
-  }, [ loading ]); // eslint-disable-line
+  const { loading, data } = useQuery(GET_HIKE_BY_ID, { variables: { id } });
 
   useEffect(() => {
     if (data) setHike(data.hikes[0]);
@@ -32,13 +24,13 @@ export const HikeDetails = () => {
       <IonContent fullscreen>
         <Flex noWrap fillParent direction="column" alignItems="center">
           <IonLoading isOpen={loading} />
-
           { hike && !loading
             && (
             <>
               <img
                 src={getPhotoUrl({ from: hike.publicPhotoPath })}
                 alt="hike"
+                // Todo: refactor this to styled components
                 style={{
                   width: '100%',
                   height: '50%',
@@ -47,21 +39,14 @@ export const HikeDetails = () => {
                   objectFit: 'cover',
                 }}
               />
-              {/* <HHCard hike={hike} /> */ }
               <h3>{ hike.title }</h3>
               <p>
-
-                {
-                      `Length: 
-                 ${(hike.length / 1000).toFixed(3)} 
-                 km`
-                    }
-
+                {`Length: ${(hike.length / 1000).toFixed(3)} km`}
               </p>
               <p style={{ padding: '12pt' }}>{ hike.description }</p>
               <ButtonWithAnimation text="View in map" linkTo={`/map/${hike!.id}`} />
             </>
-            ) }
+            )}
         </Flex>
       </IonContent>
     </IonPage>

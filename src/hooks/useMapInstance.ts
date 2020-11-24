@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import mapboxgl, { MapboxOptions } from 'mapbox-gl';
 import { MAPBOX_ACCESS_TOKEN } from '../utils/constants/secrets';
+import { addControls } from "../utils/map";
 
 interface props {
   in: React.MutableRefObject<HTMLDivElement | null>;
@@ -39,13 +40,14 @@ export const useMapInstance = ({ in: mapRef }: props) => {
     }
   }, [options]);
 
+  // force rezize
   useEffect(() => {
     if (instance) {
       instance.on('load', () => {
         instance.resize();
       });
 
-      // addControls({ to: instance });
+      addControls({ to: instance });
     }
   }, [instance]);
 

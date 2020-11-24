@@ -4,8 +4,11 @@ import {
 import React from 'react';
 import routes from './routes';
 
+/**
+ * Filters out the 'tabs' from the 'routes'
+ * and maps them to the tabBar
+ */
 const tabs = routes.filter((route) => route.tab);
-
 export const BottomTabBar = (
   <IonTabBar slot={isPlatform('desktop') ? 'top' : 'bottom'}>
     {tabs.map((tab) => (

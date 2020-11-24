@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { IonContent, IonItem, IonModal } from '@ionic/react';
+import { IonItem, IonModal } from '@ionic/react';
 import { motion } from 'framer-motion';
 import {
   font, ut_gray_background, ut_green, ut_white,
@@ -42,21 +42,16 @@ width: ${(props) => (props.fillParent ? '100%' : '')};
 height: ${(props) => (props.fillParent ? '100%' : '')};
 background-color: transparent;
 
-
-@media(min-width:  722px) {
- 
+@media(min-width:  722px) { 
  flex-flow: ${(props) => (props.noWrap ? props.direction : 'row wrap')};
  justify-content: ${(props) => (props.noWrap ? props.justifyContent : 'space-between')};
 }
 `;
 
-export const IonContentWithBackground = styled(IonContent)`
-background-image: url("../../assets/background.jpg");
-background-size: cover;
-height: 100%;
-width: 100%;
-background-size: cover;
---ion-background-color: transparent;
+export const FullScreenModal = styled(IonModal)`
+--width: 100%;
+--height: 100%;
+--border-radius: 0;
 `;
 
 export const MapContainer = styled(motion.div)`
@@ -64,13 +59,31 @@ width: 100%;
 height: 100%;
 `;
 
+export const DisplayInfoContainer = styled('div')`
+  margin: 35px 0;
+  cursor: pointer;
+  overflow: visible;
+  width: fit-content;
+  max-width: 90vw;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
+export const MapInfoCardTextContainer = styled('div')`
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+`;
+
+export const MapInfoCardImageContainer = styled('div')`
+  height: 75px;
+  width: 75px;
+  margin-left: 15px;
+`;
+
 export const Item = styled(IonItem)`
  border-radius: 7px;
  margin: 1em 0;
-`;
-
-export const FullScreenModal = styled(IonModal)`
---width: 100%;
---height: 100%;
---border-radius: 0;
 `;

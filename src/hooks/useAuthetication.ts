@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { auth } from '../utils/nhost';
 import { paths } from '../navigation/paths';
+import { EMAIL_PASS_INCORRECT, EMAIL_PASS_OR_USER_EXISTS } from '../utils/constants/strings';
 
 export const useAuthentication = () => {
   const history = useHistory();
@@ -14,7 +15,7 @@ export const useAuthentication = () => {
       await auth.register(email, password);
       history.replace(paths.home);
     } catch (e) {
-      setAuthError('You have entered an invalid email / password, or the user already exists.');
+      setAuthError(EMAIL_PASS_OR_USER_EXISTS);
       console.error(e);
     } finally {
       setIsAuthenticating(false);
@@ -27,7 +28,7 @@ export const useAuthentication = () => {
       await auth.login(email, password);
       history.replace(paths.home);
     } catch (e) {
-      setAuthError('The email or password is incorrect.');
+      setAuthError(EMAIL_PASS_INCORRECT);
       console.error(e);
     } finally {
       setIsAuthenticating(false);

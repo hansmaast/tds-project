@@ -1,5 +1,9 @@
 import { LngLat } from 'mapbox-gl';
 
+/**
+ * Retruns a geoJson style object from a set of coordinates
+ * @param coordinates
+ */
 export const getGeoJson = (
   { from: coordinates }: { from: LngLat[] },
 ) => ({

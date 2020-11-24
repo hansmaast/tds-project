@@ -13,20 +13,20 @@ import {
 import { useHistory } from 'react-router-dom';
 import { arrowForwardCircle } from 'ionicons/icons';
 import { auth } from '../utils/nhost';
-import { Item } from '../components/style/containerStyle';
+import { Item } from '../components/style/containers';
 import { LargeTitle, SubTitle } from '../components/style/textStyle';
-import { StyledFabButton } from '../components/style/buttonStyle';
+import { StyledFabButton } from '../components/style/buttons';
 import { APP_NAME } from '../utils/constants/strings';
 import { useAuthentication } from '../hooks/useAuthetication';
 import { paths } from '../navigation/paths';
 
 export const SignUp: React.FC = () => {
-  const history = useHistory();
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
   const {
     authMethods, isAuthenticating, authError, setAuthError,
   } = useAuthentication();
+  const history = useHistory();
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   useIonViewWillEnter(() => {
     if (auth.isAuthenticated()) {
@@ -42,6 +42,7 @@ export const SignUp: React.FC = () => {
   return (
     <IonPage>
       <div style={{
+        //  Todo: refactor this to styled component
         display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%', width: '100%',
       }}
       >
@@ -72,11 +73,9 @@ export const SignUp: React.FC = () => {
           </Item>
         </IonList>
         <StyledFabButton onClick={() => handleSignUp()}>
-          {
-                isAuthenticating
-                  ? <IonSpinner name="crescent" />
-                  : <IonIcon icon={arrowForwardCircle} />
-              }
+          { isAuthenticating
+            ? <IonSpinner name="crescent" />
+            : <IonIcon icon={arrowForwardCircle} />}
         </StyledFabButton>
         <SubTitle>Already signed up?</SubTitle>
         <SubTitle>No problem. Just press the link below.</SubTitle>

@@ -1,5 +1,10 @@
 import mapboxgl, { LngLatBoundsLike } from 'mapbox-gl';
 
+/**
+ * Gets the coordinates furthermost east, west, north and south points.
+ * Used for setting a bounds to the map.
+ * @param coordinates
+ */
 export const getBounds = ({ from: coordinates }: { from: mapboxgl.LngLat[] }): LngLatBoundsLike => {
   let west: number = coordinates[0].lng;
   let south: number = coordinates[0].lat;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { IonButton, IonFabButton } from '@ionic/react';
+import { IonFabButton } from '@ionic/react';
 import { motion } from 'framer-motion';
 import {
   margin_y_10_pt,
@@ -12,28 +12,6 @@ import {
   ut_green,
   ut_white,
 } from './constants';
-
-type ButtonProps = {
-  marginTop?: string,
-  marginBottom?: string,
-  marginLeft?: string,
-  marginRight?: string,
-  marginX?: string,
-  marginY?: string,
-  margin?: string,
-  width?: string,
-  padding?: string,
-  height?: string,
-  alignSelf?: string,
-}
-export const Button = styled(IonButton)<ButtonProps>`
---border-radius: 50px;
-align-self: ${(props) => props.alignSelf};
-margin: ${(props) => props.margin};
-width: ${(props) => props.width};
-height: ${(props) => props.height};
-padding: ${(props) => props.padding};
-`;
 
 export const RoundedButton = styled(motion.div)`
 color: ${ut_white};
@@ -59,4 +37,15 @@ transition: box-shadow 0.3s;
 export const StyledFabButton = styled(IonFabButton)`
 --background: ${ut_black};
 align-self: center;
+`;
+
+export const SmallCloseButton = styled(StyledFabButton)`
+position: absolute;
+width: 25px;
+height: 25px;
+right: 0;
+top: 0;
+transform: translate(50%, -50%);
+color: ${ut_green};
+z-index: 10;
 `;

@@ -9,5 +9,4 @@ export const helperStrings: IHelperString[] = [
     sentence: 'You need to do some marking before your done!‍️',
     button: 'Done',
   },
-
 ];

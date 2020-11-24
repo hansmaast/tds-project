@@ -16,18 +16,19 @@ import { auth } from '../utils/nhost';
 import { APP_NAME } from '../utils/constants/strings';
 import { useAuthentication } from '../hooks/useAuthetication';
 import { paths } from '../navigation/paths';
-import { Item } from '../components/style/containerStyle';
+import { Item } from '../components/style/containers';
 import { LargeTitle, SubTitle } from '../components/style/textStyle';
-import { StyledFabButton } from '../components/style/buttonStyle';
+import { StyledFabButton } from '../components/style/buttons';
 
 export const Login: React.FC = () => {
-  const history = useHistory();
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
   const {
     authMethods, isAuthenticating, authError, setAuthError,
   } = useAuthentication();
+  const history = useHistory();
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
+  // redirects if logged in
   useIonViewWillEnter(() => {
     if (auth.isAuthenticated()) {
       history.replace(paths.home);

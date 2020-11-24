@@ -19,5 +19,4 @@ export const GET_HIKE_BY_ID = gql`
                 avatar_url
             }
         }
-    }
-`;
+    }`;

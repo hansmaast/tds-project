@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import React, { useState } from 'react';
-import { RoundedButton } from './style/buttonStyle';
+import { RoundedButton } from './style/buttons';
 
 interface props {
   text: string;

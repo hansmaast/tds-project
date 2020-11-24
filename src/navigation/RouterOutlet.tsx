@@ -3,6 +3,9 @@ import { Route } from 'react-router-dom';
 import React from 'react';
 import routes from './routes';
 
+/**
+ * Maps every object in 'routes' as a Route
+ */
 export const RouterOutlet = (
   <IonRouterOutlet>
     {routes.map((route) => (
@@ -13,6 +16,5 @@ export const RouterOutlet = (
         exact
       />
     ))}
-    {/* <Route exact path="/" render={() => <Redirect to="/home"/>}/> */}
   </IonRouterOutlet>
 );

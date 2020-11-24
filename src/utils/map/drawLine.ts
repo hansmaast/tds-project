@@ -8,6 +8,11 @@ import { IHike } from '../../types';
 import { getBounds } from './getBounds';
 import { getLngLatCoords } from './transformers';
 
+/**
+ * Draws a line from a set of coordinates on a map instance
+ * @param coordinates
+ * @param mapInstance
+ */
 export const drawLine = (
   { from: coordinates, on: mapInstance }: { from: LngLat[], on: mapboxgl.Map },
 ) => {
@@ -20,7 +25,13 @@ export const drawLine = (
   if (routeSrc) routeSrc.setData(geoJson.data.features[0] as Feature);
 };
 
-export const drawRouteLine = (
+/**
+ * Draws  a line from a hike, sets the maps
+ * bounds (zooms in) and sets end point.
+ * @param hike
+ * @param map
+ */
+export const drawLineAndFitBounds = (
   { from: hike, on: map }: { from: IHike, on: mapboxgl.Map },
 ) => {
   const { coordinates } = hike;

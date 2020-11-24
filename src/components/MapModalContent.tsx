@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { IonIcon, IonLoading } from '@ionic/react';
 import { arrowUndoCircleOutline, closeOutline } from 'ionicons/icons';
-import { MapContainer } from './style/containerStyle';
+import { MapContainer } from './style/containers';
 import { helperStrings } from '../utils/map';
 import { useMapInstance } from '../hooks/useMapInstance';
 import { useMapMarkers } from '../hooks/useMapMarkers';
@@ -9,23 +9,23 @@ import { IHelperString, IHikeInsert } from '../types';
 import { getIdbCoords } from '../utils/map/transformers';
 import { ButtonWithAnimation } from './ButtonWithAnimation';
 import { margin_y_10_pt, ut_white } from './style/constants';
-import { StyledFabButton } from './style/buttonStyle';
+import { StyledFabButton } from './style/buttons';
 
-interface MapModalProps {
+interface props {
   newHike: IHikeInsert;
   setNewHike: React.Dispatch<React.SetStateAction<IHikeInsert>>;
   setShowMapModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
 export const MapModalContent = ({
   newHike, setNewHike, setShowMapModal,
-}: MapModalProps) => {
-  const mapRef: React.MutableRefObject<HTMLDivElement | null> = useRef(null);
+}: props) => {
+  const mapRef = useRef(null);
   const { map } = useMapInstance({ in: mapRef });
   const {
-    markers: { coordinates, undoLast },
-    totalDistanceInMeters,
+    coordinates, undoLast, totalDistanceInMeters,
   } = useMapMarkers({ on: map.instance });
+
+  // renames length to coordinateArrayLength
   const { length: coordinateArrayLength } = coordinates;
 
   const [mapTranslateX, setMapTranslateX] = useState<string>('100%');
@@ -57,6 +57,10 @@ export const MapModalContent = ({
       console.warn('Check your coords!!', coordinates);
     }
   };
+
+  /**
+   * Todo: refector the inline style to styled components
+   */
 
   return (
     <>

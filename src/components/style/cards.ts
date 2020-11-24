@@ -39,3 +39,15 @@ export const CardImage = styled('img')`
   min-height: 250px;
   object-fit: cover;
 `;
+
+export const MapInfoCard = styled(IonCard)`
+padding: 10px 15px;
+margin: 0;
+`;
+
+export const MapInfoCardImage = styled('img')`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+`;

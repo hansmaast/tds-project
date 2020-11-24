@@ -1,6 +1,6 @@
 import { CameraPhoto } from '@capacitor/core';
 import { auth } from './nhost';
-import { PUBLIC_STORAGE } from './constants/urls';
+import { PUBLIC_STORAGE } from "./constants/strings";
 
 export const getFilenameForPhoto = (_photo: CameraPhoto): string => {
   try {

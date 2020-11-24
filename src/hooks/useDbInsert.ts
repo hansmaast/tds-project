@@ -5,9 +5,9 @@ import { useHistory } from 'react-router-dom';
 import { getFilenameForPhoto } from '../utils/helpers';
 import { auth, storage } from '../utils/nhost';
 import { INSERT_HIKE } from '../graphql/mutations';
-import { PUBLIC_STORAGE_DIR } from '../utils/constants/urls';
 import { paths } from '../navigation/paths';
 import { IHikeInsert } from '../types';
+import { PUBLIC_STORAGE_DIR } from "../utils/constants/strings";
 
 interface DbInsertProps {
   data: IHikeInsert;
@@ -72,7 +72,7 @@ export const useDbInsert = ({ data, photo }: DbInsertProps) => {
     }
   };
 
-  // triggers upload
+  // triggers upload when photo is finished uploading
   useEffect(() => {
     if (uploadSuccess) {
       insertData()

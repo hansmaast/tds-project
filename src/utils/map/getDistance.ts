@@ -1,9 +1,19 @@
 import { LngLat } from 'mapbox-gl';
 
+/**
+ * Calculates the distance from coordinate a to b
+ * Using the mapbox API .distanceTo method
+ * @param a
+ * @param b
+ */
 export const getDistanceInMeters = (
   { from: a, to: b } : {from: LngLat, to: LngLat},
 ): number => a.distanceTo(b);
 
+/**
+ * Calculates the distance in a set of coordinates
+ * @param setOfCoordinates
+ */
 export const getTotalDistanceInMeters = (
   { from: setOfCoordinates }:{from: LngLat[]},
 ): number => {

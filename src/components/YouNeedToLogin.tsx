@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 import { IonRouterLink } from '@ionic/react';
-import { Flex, FullScreenModal } from './style/containerStyle';
+import { Flex, FullScreenModal } from './style/containers';
 import { ButtonWithAnimation } from './ButtonWithAnimation';
 import { paths } from '../navigation/paths';
 

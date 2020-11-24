@@ -1,5 +1,8 @@
 import { Layer } from 'mapbox-gl';
 
+/**
+ * This is the layer for the route line on the map.
+ */
 export const routeLine: Layer = {
   id: 'route',
   type: 'line',

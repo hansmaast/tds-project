@@ -1,8 +1,16 @@
 import mapboxgl from 'mapbox-gl';
 import { IHikeMarkers } from '../../types';
-import { drawRouteLine } from './drawLine';
+import { drawLineAndFitBounds } from './drawLine';
 import { getLngLat } from './transformers';
 
+/**
+ * Sets up the 'main' map with markers for each hike
+ * and adds an event listener to each marker,
+ * triggering the drawLineAndFitToBounds and displaying small popup
+ * @param data
+ * @param map
+ * @param setDisplayInfo
+ */
 export const addHikeMarkers = (
   { from: data, to: map, setDisplayInfo }: IHikeMarkers,
 ) => {
@@ -13,7 +21,7 @@ export const addHikeMarkers = (
       .addTo(map);
 
     marker.getElement().addEventListener('click', () => {
-      drawRouteLine({ from: hike, on: map });
+      drawLineAndFitBounds({ from: hike, on: map });
       setDisplayInfo({ display: true, info: hike });
     });
   });

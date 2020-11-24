@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-use-before-define
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   IonCard,
   IonContent,
@@ -17,13 +16,13 @@ import { addOutline, cameraOutline } from 'ionicons/icons';
 import { usePhoto } from '../hooks/usePhoto';
 import placeHolderPhoto from '../assets/placeholder-image.png';
 import { useDbInsert } from '../hooks/useDbInsert';
-import { StyledFabButton } from '../components/style/buttonStyle';
+import { StyledFabButton } from '../components/style/buttons';
 import { SubTitle } from '../components/style/textStyle';
 import { IHikeInsert } from '../types';
 import { ut_white } from '../components/style/constants';
 import { MapModalContent } from '../components/MapModalContent';
 import { ButtonWithAnimation } from '../components/ButtonWithAnimation';
-import { FullScreenModal } from '../components/style/containerStyle';
+import { FullScreenModal } from '../components/style/containers';
 import { auth } from '../utils/nhost';
 import { HeaderWithLogoutAndPlusSign } from '../components/HeaderWithLogoutAndPlusSign';
 import { YouNeedToLogin } from '../components/YouNeedToLogin';
@@ -46,16 +45,14 @@ export const NewHike: React.FC = () => {
   const [showMapModal, setShowMapModal] = useState<boolean>(false);
   const [showLoginModal, setShowLoginModal] = useState<boolean>(true);
 
+  // since navigation with tabs does not trigger re-render
+  // we check for authentication here..
   useIonViewWillEnter(() => {
     console.log('is auth: ', auth.isAuthenticated());
     if (!auth.isAuthenticated()) {
       setShowLoginModal(true);
     }
-  }, []);
-
-  useEffect(() => {
-    console.log(JSON.stringify(newHike, null, 4));
-  }, [newHike]);
+  }, []); // eslint-disable-line
 
   function disableUpload() {
     if (!newHike.coordinates.data
