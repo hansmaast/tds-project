@@ -1,3 +1,5 @@
+###### Note: This prooject was made using a free accuont from nHost that has expired and the Mapbox api key is not provided. Following the steps below will fail.
+
 
 #### Run the project:
 - Install dependencies: ````yarn install````
